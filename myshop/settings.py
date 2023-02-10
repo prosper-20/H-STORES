@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'core.apps.CoreConfig',
     'crispy_forms',
     'payment.apps.PaymentConfig',
+    'coupons.apps.CouponsConfig'
 ]
 
 MIDDLEWARE = [
