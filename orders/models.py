@@ -1,6 +1,7 @@
 from django.db import models
 from shop.models import Product
 import secrets
+from decimal import Decimal
 from coupons.models import Coupon
 from django.core.validators import MinValueValidator, \
                                    MaxValueValidator
@@ -33,6 +34,19 @@ class Order(models.Model):
 
     def __str__(self):
         return f'Order {self.id}'
+    
+    def get_total_cost_before_discount(self):
+        return sum(item.get_cost() for item in self.items.all())
+
+    def get_discount(self):
+        total_cost = self.get_total_cost_before_discount()
+        if self.discount:
+            return total_cost * (self.discount / Decimal(100))
+        return Decimal(0)
+
+    def get_total_cost(self):
+        total_cost = self.get_total_cost_before_discount()
+        return total_cost - self.get_discount()
 
     def save(self, *args, **kwargs):
         while not self.ref:
@@ -42,8 +56,6 @@ class Order(models.Model):
                 self.ref = ref
         super().save(*args, **kwargs)
 
-    def get_total_cost(self):
-        return sum(item.get_cost() for item in self.items.all())
 
 class OrderItem(models.Model):
     order = models.ForeignKey(Order,
