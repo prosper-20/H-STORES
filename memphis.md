@@ -36,30 +36,32 @@ Message brokers use two common messaging styles.
   
 - **Increased Reliability by ensuring message transmission**: Message brokers have an in-built redelivering mechanism that is triggered whenever a failure occurs when delivering messages to a consumer. A failed message is re-sent almost immediately or at some other time(if specified). It also supports the routing of not delivered messages - referred to as the dead-letter mechanism.
   
-# What are the demerits of using a message broker?
+# Challenges of using a message broker
 
 - **Increased system complexity**: Introducing a message broker into a system is challenging. Due to this, there are several things you must take into account, such as data consistency issues, security issues, and maintenance of the network between components.
   
 - **Debugging can be tedious**: Due to its complexity, locating the source of an error can be challenging as each service has its logs. Hence, the need to add a message-tracing feature is necessary.
   
 # Examples of message brokers
-Over the years, several message brokers have sprung up. Here are some popular and effective ones.** Amazon Simple Notification Service (SNS), Apache Kafka, RabbitMQ, and Amazon SQS.**
+Over the years, several message brokers have sprung up. Here are some popular and effective ones. **Memphis, NATS Jetstream, Apache Kafka, RabbitMQ, and Amazon SQS.**
 
 ### Here are some main features:
+- **Memphis**: Memphis is the future of 
+
 - **Amazon Simple Queue Services**: Amazon Simple Queue Service(ASQS) is a distributed queue service that can receive, store, and send messages between systems. ASQS is designed to handle many tasks without losing any message. It also allows the developer to use custom SSE keys for protecting the queues from data breaches.
 
 - **RabbitMQ**: This is an open-source message broker software that is widely used. It supports several programming languages and thrives in cloud environments. Some of its key features are distributed deployment, asynchronous messaging, and enterprise and cloud readiness.
 
 - **Redis**: Remote Dictionary Server is a fast, distributed, open-source data store used as a message broker. Redis provides support for various data structures (abstract) such as maps, lists, sets, etc. Redis's key features include data persistence, high availability, easy scalability, and an in-memory database.
   
-# When do you use message brokers?
+# When to use message brokers?
 - **Safeguarding sensitive information**: If your platform requires data transfer between systems, issues related to a data breach are bound to arise. To tackle this challenge, a message broker should be introduced as it offers end-to-end encryption.
   
 - **Notifications on mobile applications**: Modern applications have push notifications. Let's imagine you are developing a telecommunications application. Every phone connected to the network can subscribe to some message broker's topic. In that way, whenever a message is sent to the topic, all subscribers will be notified.
   
 - **E-commerce systems**: For online businesses, implementing an effective and reliable payment system is vital. Message brokers are needed to ensure that messages are consumed once, hence,  enhancing order fulfillment.
   
-# Relationship between message brokers and message queues
+# Similarities between message brokers and message queues
 From the previous definition, a message queue is simply a storage mechanism for messages. At the same time, a message broker is a mechanism that facilitates communication between systems. **How are they related?** A message queue is just a data structure or a container - a way to store messages until they are consumed. A message broker is a separate component that manages queues. In essence, message brokers use message queues to transmit information between all interested parties.
 
 # Message queues vs. Message brokers: Differences
