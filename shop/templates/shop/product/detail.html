@@ -28,10 +28,10 @@
     {% for review in reviews %}
       {{ review.body }} - {{ review.user}}
     {% endfor %}
-    <p><a href="add-review">Add Review</a></p>
+    <p><a href="{% url'add-review' %}">Add Review</a></p>
   {% else %}
     <p>No reviews yet!</p>
-    <a href="add-review">Add Review</a>
+    <a href="{% url 'add-review' %}">Add Review</a>
   {% endif %}
 </div>
 {% endblock %}
