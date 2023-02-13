@@ -40,7 +40,7 @@ Message brokers use **two** common messaging styles.
 Over the years, several message brokers have sprung up. Here are some popular and effective ones. **Memphis, NATS Jetstream, Apache Kafka, RabbitMQ, and Amazon SQS.**
 
 **Here are some main features:**
-- **Memphis**: Memphis is the future of conventional message brokers. It offers an ecosystem that supports reliable and rapid development of queue-based applications that involve large volumes of data, modern protocols etc. Looking for a simple, cloud-native and robust message broker? **Memphis** is your best bet.
+- **Memphis**: Memphis is the future of conventional message brokers. It offers an ecosystem that supports the reliable and rapid development of queue-based applications that involve large volumes of data, modern protocols, etc. Looking for a simple, cloud-native and robust message broker? **Memphis** is your best bet.
   
 - **Kafka**: Kafka is an open-source, distributed event streaming platform that is used as a replacement for conventional message brokers. The key features of Kafka are high scalability, high availability, low latency, and permanent storage.
   
@@ -59,4 +59,4 @@ From the previous definition, a message queue is simply a storage mechanism for 
 ## Message queues vs. Message brokers: Differences
 A queue is a data structure based on FIFO(First-In-First-Out). A message queue orders the way information is to be transmitted. i.e., the first message in the queue should be the first message to be consumed/executed by the consumer. A message queue oversees the ordering of transmitted tasks; they are not interested in the information contained in the task. On the other hand, message brokers are more interested in the conversion, transmission, and routing of data between services. As a result, they can access the information carried through them. **What's the difference?** The queue is the storage for produced data until it is ready to be consumed, while the message broker executes tasks according to the order described by the message queue.
 # Conclusion
-Message queues and message brokers are two separate components that work together to achieve a common goal: facilitating communication between services, systems, and applications. The message queue receives and stores tasks while the message broker executes the tasks stored in the queue. Hence, the message broker is an extension of a message queue.
+A message queue is a medium used by applications to send messages. It is not interested in the information contained in the task. The message broker receives the information contained in the message queue, translates it, and delivers it to the specified receiver.

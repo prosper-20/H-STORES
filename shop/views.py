@@ -26,11 +26,15 @@ def product_detail(request, id, slug):
                                 available=True)
     reviews = Review.objects.filter(product=product)
     cart_product_form = CartAddProductForm()
+    similar_products = Product.objects.filter(category=product.category)
+    
+
     return render(request,
                   'shop/product/detail.html',
                   {'product': product,
                    'cart_product_form': cart_product_form,
-                   "reviews": reviews})
+                   "reviews": reviews,
+                   "similar_products": similar_products})
 
 
 
