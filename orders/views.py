@@ -33,7 +33,7 @@ def order_create(request):
             cart.clear()
             # launch asynchronous task
             order_created.delay(order.id)
-            first_name = form["first_name"]
+            first_name = form.cleaned_data["first_name"]
             return render(request,
                           'orders/order/created.html',
                           {'order': order,
