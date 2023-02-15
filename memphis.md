@@ -1,4 +1,4 @@
-# Message brokers VS Message queue
+**# Message brokers VS Message queue
 Keeping up with the demands of modern applications is getting more difficult by the day. We now have large volumes of data and information constantly being exchanged online. Some of these exchanges heavily depend on the computers' resources, network speed, and transmission mode. With these exchange comes challenges such as data breaches, data loss, transmission failures, etc. Fortunately, one solution to the challenges highlighted above is a message broker.
 
 ## What is a message broker?
@@ -59,4 +59,4 @@ From the previous definition, a message queue is simply a storage mechanism for 
 ## Message queues vs. Message brokers: Differences
 A queue is a data structure based on FIFO(First-In-First-Out). A message queue orders the way information is to be transmitted. i.e., the first message in the queue should be the first message to be consumed/executed by the consumer. A message queue oversees the ordering of transmitted tasks; they are not interested in the information contained in the task. On the other hand, message brokers are more interested in the conversion, transmission, and routing of data between services. As a result, they can access the information carried through them. **What's the difference?** The queue is the storage for produced data until it is ready to be consumed, while the message broker executes tasks according to the order described by the message queue.
 # Conclusion
-A message queue is a medium used by applications to send messages. It is not interested in the information contained in the task. The message broker receives the information contained in the message queue, translates it, and delivers it to the specified receiver.
+A message queue is a medium used by applications to send messages. It is not interested in the information contained in the task. The message broker receives the information contained in the message queue, translates it, and delivers it to the specified receiver.**

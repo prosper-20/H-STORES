@@ -1,5 +1,5 @@
 {% extends "shop/base.html" %}
-
+{% load crispy_forms_tags %}
 {% block title %}
   Checkout
 {% endblock %}
@@ -25,7 +25,7 @@
     <p>Total: ${{ cart.get_total_price_after_discount|floatformat:2 }}</p>
   </div>
   <form method="post" class="order-form">
-    {{ form.as_p }}
+    {{ form| crispy }}
     <p><input type="submit" value="Place order"></p>
     {% csrf_token %}
   </form>

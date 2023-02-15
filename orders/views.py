@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import OrderItem
+from .models import OrderItem, Order
 from .forms import OrderCreateForm, RefundForm
 from .tasks import order_created
 from cart.cart import Cart
@@ -41,6 +41,47 @@ def order_create(request):
     return render(request,
                   'orders/order/create.html',
                   {'cart': cart, 'form': form})
+
+# This is a test order_create form
+
+def order_create_2(request):
+    cart = Cart(request)
+    if request.method == "POST":
+        first_name = request.POST.get("first_name")
+        last_name = request.POST.get("last_name")
+        email = request.POST.get("email")
+        address = request.POST.get("addresss")
+        postal_code = request.POST.get("postal_code")
+        city = request.POST.get("city")
+
+        order = Order.objects.create(first_name=first_name, last_name=last_name,
+        email=email, address=address, postal_code=postal_code, city=city)
+        order.save(commit=False)
+        if cart.coupon:
+            order.coupon = cart.coupon
+            order.discount = cart.coupon.discount
+            order.save()
+            for item in cart:
+                OrderItem.objects.create(order=order,
+                                        product=item['product'],
+                                        price=item['price'],
+                                        quantity=item['quantity'])
+            # clear the cart
+            cart.clear()
+            # launch asynchronous task
+            order_created.delay(order.id)
+            return render(request,
+                          'orders/order/created.html',
+                          {'order': order})
+    else:
+        form = OrderCreateForm()
+    return render(request,
+                  'orders/order/create.html',
+                  {'cart': cart, 'form': form})
+
+
+
+        
 
 
 @staff_member_required
