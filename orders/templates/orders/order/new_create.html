@@ -1,0 +1,23 @@
+<h1>Create Order</h1>
+
+
+{% for message in messages %}
+<h3>{{ message }}</h3>
+{% endfor %}
+
+<form action="" method="post">
+    {% csrf_token %}
+    <p>First name</p>
+    <input type="text" name="first_name" id="">
+    <p>Last name:</p>
+    <input type="text" name="last_name">
+    <p>email</p>
+    <input type="email" name="email" id="">
+    <p>address</p>
+    <input type="text" name="address" id="">
+    <p>postal_code</p>
+    <input type="text" name="postal_code" id="">
+    <p>city</p>
+    <input type="text" name="city" id="">
+    <input type="submit">
+</form>

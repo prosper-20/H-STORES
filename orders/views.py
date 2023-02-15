@@ -33,9 +33,11 @@ def order_create(request):
             cart.clear()
             # launch asynchronous task
             order_created.delay(order.id)
+            first_name = form["first_name"]
             return render(request,
                           'orders/order/created.html',
-                          {'order': order})
+                          {'order': order,
+                          'first_name': first_name})
     else:
         form = OrderCreateForm()
     return render(request,
@@ -50,13 +52,13 @@ def order_create_2(request):
         first_name = request.POST.get("first_name")
         last_name = request.POST.get("last_name")
         email = request.POST.get("email")
-        address = request.POST.get("addresss")
+        address = request.POST.get("address")
         postal_code = request.POST.get("postal_code")
         city = request.POST.get("city")
 
         order = Order.objects.create(first_name=first_name, last_name=last_name,
         email=email, address=address, postal_code=postal_code, city=city)
-        order.save(commit=False)
+        order.save()
         if cart.coupon:
             order.coupon = cart.coupon
             order.discount = cart.coupon.discount
@@ -76,7 +78,7 @@ def order_create_2(request):
     else:
         form = OrderCreateForm()
     return render(request,
-                  'orders/order/create.html',
+                  'orders/order/new_create.html',
                   {'cart': cart, 'form': form})
 
 
