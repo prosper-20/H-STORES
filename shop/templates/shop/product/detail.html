@@ -28,7 +28,7 @@
     {% for review in reviews %}
       {{ review.body }} - {{ review.user}}
     {% endfor %}
-    <p><a href="{% url 'shop:add-review' %}">Add Review</a></p>
+    <p><a href="{% url 'shop:add-review' product.id product.category %}">Add Review</a></p>
   {% else %}
     <p>No reviews yet!</p>
     <a href="{% url 'shop:add-review' product.id product.category %}">Add Review</a>

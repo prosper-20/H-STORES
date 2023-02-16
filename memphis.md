@@ -1,9 +1,9 @@
-**# Message brokers VS Message queue
+# Message brokers VS Message queue
 Keeping up with the demands of modern applications is getting more difficult by the day. We now have large volumes of data and information constantly being exchanged online. Some of these exchanges heavily depend on the computers' resources, network speed, and transmission mode. With these exchange comes challenges such as data breaches, data loss, transmission failures, etc. Fortunately, one solution to the challenges highlighted above is a message broker.
 
 ## What is a message broker?
 A message broker is software that aids communication between services, systems, or applications. They can also route, store, and deliver information to a specified destination. Message brokers foster stable and asynchronous communication between systems. In summary, the essence of a message broker is to provide a stable and reliable means for applications to communicate. **Sounds great, right?** Let's learn some more.
-
+**
 ## Essential components of a message broker
 - **Message**: the bits of information we want to send.
 - **Queue**: this is the data structure that describes how the broker executes messages. It is based on FIF0 (First-In-First-Out). A perfect example is a queue at a grocery store.
