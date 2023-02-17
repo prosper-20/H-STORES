@@ -21,6 +21,7 @@ class SubCategory(models.Model):        # Example under category electronics, th
 
 
 class SuperSubCategory(models.Model): # Example under category electronics, ans sub category television, then thiscan be LEDs
+    category = models.ForeignKey(SubCategory, on_delete=models.CASCADE)
     name = models.CharField(max_length=200)
     slug = models.SlugField(max_length=200, unique=True)
 
