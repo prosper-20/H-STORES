@@ -36,14 +36,14 @@ class initiate_payment_2(View):
 
 
 
-class PaymentCreateView(CreateView):
-    model = Payment
-    template_name = "class_create.html"
-    fields = ["email"]
-    success_url = "/"
+# class PaymentCreateView(CreateView):
+#     model = Payment
+#     template_name = "class_create.html"
+#     fields = ["email"]
+#     success_url = "/"
 
-    def form_valid(self, form):
-        form.instance.
+#     def form_valid(self, form):
+#         form.instance.
 
 
 # def initiate_payment_2(request):

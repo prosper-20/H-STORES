@@ -26,7 +26,8 @@ def product_detail(request, id, slug):
                                 available=True)
     reviews = Review.objects.filter(product=product)
     cart_product_form = CartAddProductForm()
-    similar_products = Product.objects.filter(category=product.category)
+    similar_products = Product.objects.filter(category=product.category).exclude(id=id, slug=slug) # This is to get similar products except the current one
+    
     
 
     return render(request,
