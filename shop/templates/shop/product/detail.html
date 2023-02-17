@@ -36,6 +36,7 @@
   <div>
     <h2>Similar Products</h2>
   {% for product in similar_products %}
+      <img src="{{ product.image.url }}" width="400" height="300" alt="">
       <a href="{{ product.get_absolute_url }}">{{ product }}</a>
   {% endfor %}
 </div>

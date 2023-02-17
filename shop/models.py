@@ -2,6 +2,41 @@ from django.db import models
 from django.urls import reverse
 from django.conf import settings
 
+
+class SubCategory(models.Model):        # Example under category electronics, this can be television
+    name = models.CharField(max_length=200)
+    slug = models.SlugField(max_length=200, unique=True)
+
+    class Meta:
+        ordering = ['name']
+        indexes = [
+            models.Index(fields=['name']),
+        ]
+        verbose_name = 'Subcategory'
+        verbose_name_plural = 'Subcategories'
+
+    def __str__(self):
+        return self.name
+    
+
+
+class SuperSubCategory(models.Model): # Example under category electronics, ans sub category television, then thiscan be LEDs
+    name = models.CharField(max_length=200)
+    slug = models.SlugField(max_length=200, unique=True)
+
+    class Meta:
+        ordering = ['name']
+        indexes = [
+            models.Index(fields=['name']),
+        ]
+        verbose_name = 'Supersubcategory'
+        verbose_name_plural = 'Supersubcategories'
+
+    def __str__(self):
+        return self.name
+    
+
+
 class Category(models.Model):
     name = models.CharField(max_length=200)
     slug = models.SlugField(max_length=200,
@@ -27,6 +62,8 @@ class Product(models.Model):
     category = models.ForeignKey(Category,
                                  related_name='products',
                                  on_delete=models.CASCADE)
+    subcategory = models.ForeignKey(SubCategory, on_delete=models.CASCADE, blank=True, null=True)
+    supersubcategory = models.ForeignKey(SuperSubCategory, on_delete=models.CASCADE, blank=True, null=True)
     name = models.CharField(max_length=200)
     slug = models.SlugField(max_length=200)
     image = models.ImageField(upload_to='products/%Y/%m/%d',

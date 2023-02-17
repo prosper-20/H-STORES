@@ -1,10 +1,21 @@
 from django.contrib import admin
-from .models import Category, Product, Review
+from .models import Category, Product, Review, SubCategory, SuperSubCategory
 
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ['name', 'slug']
+    prepopulated_fields = {'slug': ('name',)}
+
+
+@admin.register(SubCategory)
+class SubCategoryAdmin(admin.ModelAdmin):
+    list_display = ["name", "slug"]
+    prepopulated_fields = {'slug': ('name',)}
+
+@admin.register(SuperSubCategory)
+class SuperSubCategory(admin.ModelAdmin):
+    list_display = ["name", "slug"]
     prepopulated_fields = {'slug': ('name',)}
 
 
