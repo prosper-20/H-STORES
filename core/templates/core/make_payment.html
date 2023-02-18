@@ -22,7 +22,8 @@
         let obj = {
             key: "pk_test_db7eb580c0015ee09205de7791906de5b11d108d",
             email: "{{ payment.email }}",
-            amount: "{{ payment.amount_value }}",
+            amount: "{{ payment.amount }}" * 100,           
+            // You changed the amount from {{ payment.amount_value }} to what is above
             ref: ref,
             callback: function(response){
                 window.location.href = "{% url 'verify-payment' payment.ref %}";
