@@ -8,4 +8,8 @@
   <h1>Thank you {{ first_name }}</h1>
   <p>Your order has been successfully completed. Your order number is
   <strong>{{ order.id }}</strong>.</p>
+
+  <div>
+    <a class="btn btn-primary" href="{% url 'initiate_payment_3' %}">Pay Now</a>
+  </div>
 {% endblock %}
