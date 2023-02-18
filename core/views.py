@@ -36,6 +36,18 @@ class initiate_payment_2(View):
             return render(request, "core/make_payment.html", {"payment": payment, 'paystack_public_key': 'pk_test_db7eb580c0015ee09205de7791906de5b11d108d'})
 
 
+def initiate_payment_3(request):
+    if request.method == "POST":
+        amount = request.POST.get("amount")
+        email = request.POST.get("email")
+
+        payment = Payment.objects.create(amount=amount, email=email)
+        return render(request, "core/make_payment.html", {"payment": payment, 'paystack_public_key': 'pk_test_db7eb580c0015ee09205de7791906de5b11d108d'})
+    
+    else:
+        return render(request, "core/initiate_payment_3.html")
+
+
 
 # class PaymentCreateView(CreateView):
 #     model = Payment
@@ -69,14 +81,14 @@ def verify_payment(request, ref):
     return redirect("initiate-payment")
 
 
-class PaymentCreateView(CreateView):
-    model = Payment
-    success_url = "/"
-    fields = ["email"]
+# class PaymentCreateView(CreateView):
+#     model = Payment
+#     success_url = "/"
+#     fields = ["email"]
 
-    def form_valid(self, form):
-        form.instance.amount = self.request.order.get_total_cost
-        return super().form_valid(form)
+#     def form_valid(self, form):
+#         form.instance.amount = self.request.order.get_total_cost
+#         return super().form_valid(form)
 
 
 
