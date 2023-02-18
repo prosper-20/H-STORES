@@ -1,6 +1,7 @@
 from django.db import models
 import secrets
 from .paystack import PayStack
+from orders.models import Order
 
 class Payment(models.Model):
     amount = models.PositiveIntegerField()
@@ -37,3 +38,13 @@ class Payment(models.Model):
             if self.verified:
                 return True
         return False
+    
+
+
+
+
+# def order_payment(request, id):
+#     current_order = Order.objects.get(id=id)
+#     if current_order.paid == False:
+
+

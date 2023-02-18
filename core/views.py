@@ -5,6 +5,7 @@ from .models import Payment
 from django.contrib import messages
 from django.views import View
 from django.views.generic import CreateView
+from orders.models import Order
 
 def initiate_payment(request):
     if request.method == "POST":
@@ -66,3 +67,15 @@ def verify_payment(request, ref):
     else:
         messages.error(request, "Verification failed")
     return redirect("initiate-payment")
+
+
+
+
+
+# def payment_order(request, id):
+#     current_order = Order.objects.get(id=id)
+#     if current_order.paid == False:
+#         order_email = current_order.email
+#         order_amount = current_order.get_total_cost()
+#         if Payment.objects.filter(amount=order_amount, email=order_email):
+
