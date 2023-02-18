@@ -69,6 +69,15 @@ def verify_payment(request, ref):
     return redirect("initiate-payment")
 
 
+class PaymentCreateView(CreateView):
+    form_class =  PaymentForm
+    success_url = "/"
+    fields = ["email"]
+
+    def form_valid(self, form):
+        form.instance.amount = self.request.order.get_total_cost
+        
+
 
 
 
