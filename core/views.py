@@ -70,7 +70,7 @@ def verify_payment(request, ref):
 
 
 class PaymentCreateView(CreateView):
-    form_class =  PaymentForm
+    model = Payment
     success_url = "/"
     fields = ["email"]
 
