@@ -90,6 +90,23 @@ def verify_payment(request, ref):
     return redirect("initiate-payment")
 
 
+
+
+
+def verfiy_order_payment(request, id): # This is to change the  order.paid to True
+    order = Order.objects.get(id=id)
+    payment = Payment.objects.filter(amount=order.get_total_cost,
+                                     email=order.email, verified=True)
+    if payment.exists():
+        order.paid = True
+        messages.success(request, "Payment has been made for your order")
+        return redirect("/")
+    else:
+        messages.error(request, "No matching order found")
+        return redirect("/")
+
+
+
 # class PaymentCreateView(CreateView):
 #     model = Payment
 #     success_url = "/"
