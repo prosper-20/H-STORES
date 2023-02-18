@@ -95,7 +95,7 @@ def verify_payment(request, ref):
 
 def verfiy_order_payment(request, id): # This is to change the  order.paid to True
     order = Order.objects.get(id=id)
-    payment = Payment.objects.filter(amount=order.get_total_cost,
+    payment = Payment.objects.filter(amount=order.get_total_cost(),
                                      email=order.email, verified=True)
     if payment.exists():
         order.paid = True
