@@ -4,11 +4,11 @@
 <div class="container">
     <div class="d-flex row justify-content center align-items-center py-md-5 py-3" style="min-height: 90vh;">
     <div class="col-12">
-        <h1>You are to pay {{ order.get_t</h1>
+        <h1>Hi {{ order.first_name }}, you are to pay {{ order.get_total_cost }}</h1>
         <form action="" method="post" id="paymentForm">
             {% csrf_token %}
             <p>Amount</p>
-            <input type="number" name="amount" min="0" class="numberinput form-control" required id="id_amount">
+            <input type="number" name="amount" value="{{ order.get_total_cost }}" disabled="True" min="0" class="numberinput form-control" required id="id_amount">
             <p>Email</p>
             <input type="email" name="email" id="">
             <input class="btn btn-primary" type="submit" name="" value="submit">

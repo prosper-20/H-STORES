@@ -10,6 +10,6 @@
   <strong>{{ order.id }}</strong>.</p>
 
   <div>
-    <a class="btn btn-primary" href="{% url 'initiate_payment_3' %}">Pay Now</a>
+    <a class="btn btn-primary" href="{% url 'initiate_payment_3' order.id %}">Pay Now</a>
   </div>
 {% endblock %}

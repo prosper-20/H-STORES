@@ -39,7 +39,7 @@ class initiate_payment_2(View):
 def initiate_payment_3(request, id):
     order = Order.objects.get(id=id)
     if request.method == "POST":
-        amount = request.POST.get("amount")
+        amount = order.get_total_cost()
         email = request.POST.get("email")
 
         payment = Payment.objects.create(amount=amount, email=email)
@@ -51,7 +51,10 @@ def initiate_payment_3(request, id):
         return render(request, "core/make_payment.html", context)
     
     else:
-        return render(request, "core/initiate_payment_3.html")
+        context = {
+            'order': order,
+        }
+        return render(request, "core/initiate_payment_3.html", context)
 
 
 
