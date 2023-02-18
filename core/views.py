@@ -76,7 +76,7 @@ class PaymentCreateView(CreateView):
 
     def form_valid(self, form):
         form.instance.amount = self.request.order.get_total_cost
-        
+        return super().form_valid(form)
 
 
 
