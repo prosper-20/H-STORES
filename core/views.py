@@ -99,6 +99,7 @@ def verfiy_order_payment(request, id): # This is to change the  order.paid to Tr
                                      email=order.email, verified=True)
     if payment.exists():
         order.paid = True
+        order.save()
         messages.success(request, "Payment has been made for your order")
         return redirect("/")
     else:
