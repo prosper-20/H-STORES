@@ -87,7 +87,7 @@ def verify_payment(request, ref):
         messages.success(request, "Verification successful")
     else:
         messages.error(request, "Verification failed")
-    return redirect("initiate-payment")
+    return redirect("shop:product_list")
 
 
 
