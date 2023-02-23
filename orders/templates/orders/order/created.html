@@ -6,10 +6,15 @@
 
 {% block content %}
   <h1>Thank you {{ first_name }}</h1>
-  <p>Your order has been successfully completed. Your order number is
+  <p>Your order has been successfully created. Your order number is
   <strong>{{ order.id }}</strong>.</p>
+  
 
   <div>
     <a class="btn btn-primary" href="{% url 'initiate_payment_3' order.id %}">Pay Now</a>
+    <br>
+    <br>
+    <br>
+    <a class="btn btn-warning" href="{% url 'shop:product_list' }">Pay Later</a>
   </div>
 {% endblock %}
