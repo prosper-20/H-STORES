@@ -84,7 +84,7 @@ def verify_payment(request, ref):
     payment = get_object_or_404(Payment, ref=ref)
     verified = payment.verify_payment()
     if verified:
-        messages.success(request, "Verification successful")
+        messages.success(request, f"Verification successful")
     else:
         messages.error(request, "Verification failed")
     return redirect("shop:product_list")
