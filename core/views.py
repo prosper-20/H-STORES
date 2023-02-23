@@ -40,7 +40,7 @@ def initiate_payment_3(request, id):
     order = Order.objects.get(id=id)
     if request.method == "POST":
         amount = order.get_total_cost()
-        email = request.POST.get("email")
+        email = order.email
 
         payment = Payment.objects.create(amount=amount, email=email)
         context = {
