@@ -7,6 +7,8 @@ from django.views import View
 from django.views.generic import CreateView
 from orders.models import Order, OrderItem
 from django.http import JsonResponse
+import json
+from core.models import Delivery_Fee
 
 def initiate_payment(request):
     if request.method == "POST":
@@ -188,4 +190,8 @@ def delivery(request):
 
 
 def getPrices(request):
-    return JsonResponse("It is working", safe=False )
+    data = json.loads(request.body)
+    lga_id = data["id"]
+    print(lga_id)
+    prices = Delivery_Fee.objects.filter(lga__id=lga_id)
+    return JsonResponse(list(prices.values("id", "price")), safe=False )

@@ -92,6 +92,7 @@ class LGA(models.Model):
 
 class Delivery_Fee(models.Model):
     price = models.DecimalField(max_digits=6, decimal_places=2)
+    lga = models.ForeignKey(LGA, on_delete=models.CASCADE)
 
     def __str__(self):
         return f"{self.price}"
