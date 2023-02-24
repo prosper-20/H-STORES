@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Payment, Order_Payment
+from .models import Payment, Order_Payment, Delivery
 from orders.models import Order, OrderItem
 import csv
 import datetime
@@ -8,6 +8,7 @@ from django.urls import reverse
 from django.utils.safestring import mark_safe
 
 admin.site.register(Payment)
+admin.site.register(Delivery)
 
 
 

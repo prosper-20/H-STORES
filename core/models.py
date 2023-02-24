@@ -82,6 +82,16 @@ class Payment(models.Model):
 
 
 
+class Delivery(models.Model):
+    order = models.ForeignKey(Order_Payment, on_delete=models.CASCADE)
+    L_G_A = models.CharField(max_length=100)
+    delivery_fee = models.DecimalField(max_digits=6, decimal_places=2)
+
+    def __str__(self):
+        return self.order
+
+
+
 
 # def order_payment(request, id):
 #     current_order = Order.objects.get(id=id)
