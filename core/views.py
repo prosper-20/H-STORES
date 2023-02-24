@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .forms import PaymentForm
+from .forms import PaymentForm, DeliveryForm
 from django.conf import settings
 from .models import Payment, Order_Payment
 from django.contrib import messages
@@ -175,6 +175,14 @@ def verfiy_order_payment(request, id): # This is to change the  order.paid to Tr
 #         if Payment.objects.filter(amount=order_amount, email=order_email):
 
 
+
+def delivery(request):
+    form = DeliveryForm()
+    if request.method == "POST":
+        form = DeliveryForm(request.POST)
+        if form.is_valid():
+            form.save()
+    return render(request, "core/delivery.html", {"form": form})
 
 
 
