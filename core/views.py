@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .forms import PaymentForm
 from django.conf import settings
-from .models import Payment
+from .models import Payment, Order_Payment
 from django.contrib import messages
 from django.views import View
 from django.views.generic import CreateView
@@ -55,6 +55,28 @@ def initiate_payment_3(request, id):
             'order': order,
         }
         return render(request, "core/initiate_payment_3.html", context)
+    
+
+def initiate_payment_4(request, id):
+    order = Order.objects.get(id=id)
+    if request.method == "POST":
+        amount = order.get_total_cost()
+        email = order.email
+
+        payment = Order_Payment.objects.create(order=order, amount=amount, email=email)
+        context = {
+            "payment": payment, 
+            'order': order,
+            'paystack_public_key': 'pk_test_db7eb580c0015ee09205de7791906de5b11d108d'
+        }
+        return render(request, "core/make_payment.html", context)
+    
+    else:
+        context = {
+            'order': order,
+        }
+        return render(request, "core/initiate_payment_3.html", context)
+
 
 
 
@@ -88,6 +110,18 @@ def verify_payment(request, ref):
     else:
         messages.error(request, "Verification failed")
     return redirect("shop:product_list")
+
+
+def verify_payment_2(request, ref, id):
+    payment = get_object_or_404(Payment, ref=ref)
+    order = get_object_or_404(Order, id=id)
+    verified = payment.verify_payment()
+    if verified:
+        messages.success(request, f"Verification successful")
+    else:
+        messages.error(request, "Verification failed")
+    return redirect("shop:product_list")
+
 
 
 
@@ -126,4 +160,8 @@ def verfiy_order_payment(request, id): # This is to change the  order.paid to Tr
 #         order_email = current_order.email
 #         order_amount = current_order.get_total_cost()
 #         if Payment.objects.filter(amount=order_amount, email=order_email):
+
+
+
+
 
