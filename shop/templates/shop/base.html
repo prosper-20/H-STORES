@@ -33,7 +33,7 @@
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
               <a class="dropdown-item" href="">My Account</a>
               <a class="dropdown-item" href="{% url 'orders:order-history' %}">My orders</a>
-              <a class="dropdown-item" href="">Logout</a>
+              <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
             </div>
           </li>
         {% else %}
@@ -42,8 +42,8 @@
             role="button" data-toggle="dropdown" aria-haspopup="true"
             aria-expanded="false"><i class="fa fa-user" style="color: black" aria-hidden="true"></i></a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="nav-item nav-link" href="">Login</a>
-              <a class="nav-item nav-link" href="">Register</a>
+              <a class="nav-item nav-link" href="{% url 'login' %}">Login</a>
+              <a class="nav-item nav-link" href="{% url 'register' %}">Register</a>
             </div>
           </li>
         {% endif %}

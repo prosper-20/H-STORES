@@ -172,3 +172,9 @@ def order_history(request):
     return render(request, "orders/order/history2.html", context)
 
 
+
+def pay_later(request):
+    messages.success(f"Your order has been placed")
+    return render(request, 'shop/product/list.html')
+
+
