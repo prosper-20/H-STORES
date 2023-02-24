@@ -6,6 +6,7 @@ from orders.models import Order
 
 class Order_Payment(models.Model):      # You just created this....
     order = models.ForeignKey(Order, on_delete=models.CASCADE)
+    amount = models.PositiveIntegerField()
     ref = models.CharField(max_length=200)
     email = models.EmailField()
     verified = models.BooleanField(default=False)

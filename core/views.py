@@ -64,14 +64,14 @@ def initiate_payment_4(request, id):
         amount = order.get_total_cost()
         email = order.email
 
-        payment = Order_Payment.objects.create(order=order, amount=amount, email=email)
+        order_payment = Order_Payment.objects.create(order=order, amount=amount, email=email)
         context = {
-            "payment": payment, 
+            "order_payment": order_payment, 
             'order': order,
             "orderitem": orderitem,
             'paystack_public_key': 'pk_test_db7eb580c0015ee09205de7791906de5b11d108d'
         }
-        return render(request, "core/make_payment.html", context)
+        return render(request, "core/make_payment4.html", context) # You changed it from make_payment to make_payment4
     
     else:
         context = {
@@ -114,16 +114,26 @@ def verify_payment(request, ref):
         messages.error(request, "Verification failed")
     return redirect("shop:product_list")
 
-
-def verify_payment_2(request, ref, id):
-    payment = get_object_or_404(Payment, ref=ref)
-    order = get_object_or_404(Order, id=id)
-    verified = payment.verify_payment()
+def verify_payment2(request, ref):
+    order_payment = get_object_or_404(Order_Payment, ref=ref)
+    verified = order_payment.verify_payment()
     if verified:
         messages.success(request, f"Verification successful")
     else:
         messages.error(request, "Verification failed")
     return redirect("shop:product_list")
+
+
+
+# def verify_payment_2(request, ref, id):
+#     payment = get_object_or_404(Payment, ref=ref)
+#     order = get_object_or_404(Order, id=id)
+#     verified = payment.verify_payment()
+#     if verified:
+#         messages.success(request, f"Verification successful")
+#     else:
+#         messages.error(request, "Verification failed")
+#     return redirect("shop:product_list")
 
 
 
