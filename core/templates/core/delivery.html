@@ -8,11 +8,52 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Delivery form</h1>
+    <!-- <h1>Delivery form</h1>
     <form action="" method="post">
         {% csrf_token %}
         {{ form|crispy}}
         <button type="submit">Submit</button>
+    </form> -->
+    <form action="" method = "POST" id="my_form">
+        <h3 style="text-align: center">Delivery Info</h3>
+        {% csrf_token %}
+        {% for field in form %}
+
+        <label class="form-label">{{field.label}}</label>
+        
+        {{field}}
+        <br>
+        {% endfor %}
+
+        <input type="submit" value="Save" class ="btn btn-primary">
     </form>
+    <script>
+        let lga_field = document.getElementById("id_L_G_A")
+        lga_field.addEventListener("change", getLGAId)
+
+        function getLGAId(e){
+            console.log(e.target.value)
+            let lga_id = e.target.value 
+
+            const data = { username: 'example' };
+            let url = "{% url 'get-prices'  %}"
+
+        fetch('{% %}', {
+        method: 'POST', // or 'PUT'
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+        })
+        .then((response) => response.json())
+        .then((data) => {
+            console.log('Success:', data);
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+
+        }
+    </script>
 </body>
 </html>

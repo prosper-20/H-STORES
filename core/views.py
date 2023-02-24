@@ -6,6 +6,7 @@ from django.contrib import messages
 from django.views import View
 from django.views.generic import CreateView
 from orders.models import Order, OrderItem
+from django.http import JsonResponse
 
 def initiate_payment(request):
     if request.method == "POST":
@@ -186,3 +187,5 @@ def delivery(request):
 
 
 
+def getPrices(request):
+    return JsonResponse("It is working", safe=False )

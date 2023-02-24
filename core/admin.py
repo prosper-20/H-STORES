@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Payment, Order_Payment, Delivery
+from .models import Payment, Order_Payment, Delivery, LGA, Delivery_Fee
 from orders.models import Order, OrderItem
 import csv
 import datetime
@@ -9,6 +9,8 @@ from django.utils.safestring import mark_safe
 
 admin.site.register(Payment)
 admin.site.register(Delivery)
+admin.site.register(LGA)
+admin.site.register(Delivery_Fee)
 
 
 

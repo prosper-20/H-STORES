@@ -86,12 +86,18 @@ class LGA(models.Model):
     def __str__(self):
         return self.name
     
+    class Meta:
+        verbose_name_plural = "LGAs"
+    
 
 class Delivery_Fee(models.Model):
     price = models.DecimalField(max_digits=6, decimal_places=2)
 
     def __str__(self):
-        return self.price
+        return f"{self.price}"
+    
+    class Meta:
+        verbose_name_plural = "Delivery Fees"
 
 
 
@@ -101,7 +107,10 @@ class Delivery(models.Model):
     delivery_fee = models.ForeignKey(Delivery_Fee, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.order
+        return f"{self.order}"
+    
+    class Meta:
+        verbose_name_plural = "Deliveries"
 
 
 
