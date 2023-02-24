@@ -7,16 +7,16 @@
 {% block breadcrumbs %}
   <div class="breadcrumbs">
     <a href="{% url 'admin:index' %}">Home</a> &rsaquo;
-    <a href="{% url 'admin:orders_order_changelist' %}">Orders</a>
+    <a href="{% url 'admin:orders_order_changelist' %}">Paid Orders</a>
     &rsaquo;
-    <a href="{% url 'admin:orders_order_change' order.id %}">Order {{ order.id }}</a>
+    <a href="{% url 'admin:orders_order_change' order_payment.order.id %}">Order {{ order_payment.order.id }}</a>
     &rsaquo; Detail
   </div>
 {% endblock %}
 
 {% block content %}
 <div class="module">
-  <h1>Order {{ order.id }}</h1>
+  <h1>Order {{ order_payment.order.id }}</h1>
   <ul class="object-tools">
     <li>
       <a href="#" onclick="window.print();">
@@ -27,37 +27,40 @@
   <table>
     <tr>
       <th>Created</th>
-      <td>{{ order.created }}</td>
+      <td>{{ order_payment.date_created }}</td>
     </tr>
     <tr>
       <th>Customer</th>
-      <td>{{ order.first_name }} {{ order.last_name }}</td>
+      <td>First name:{{ order_payment.order.first_name }} Last name:{{ order_payment.order.last_name }}</td>
     </tr>
     <tr>
       <th>E-mail</th>
-      <td><a href="mailto:{{ order.email }}">{{ order.email }}</a></td>
+      <td><a href="mailto:{{ order.email }}">{{ order_payment.email }}</a></td>
     </tr>
     <tr>
       <th>Address</th>
     <td>
-      {{ order.address }},
-      {{ order.postal_code }} {{ order.city }}
+      {{ order_payment.order.address }},
+      {{ order_payment.order.postal_code }} {{ order_payment.order.city }}
     </td>
     </tr>
     <tr>
       <th>Total amount</th>
-      <td>${{ order.get_total_cost }}</td>
+      <td><span>&#8358;</span>{{ order_payment.order.get_total_cost }}</td>
     </tr>
     <tr>
       <th>Status</th>
-      <td>{% if order.paid %}Paid{% else %}Pending payment{% endif %}</td>
+      <td>{% if order_payment.verified %}Paid{% else %}Pending payment{% endif %}</td>
     </tr>
     <tr>
-      <th>Stripe payment</th>
+      <th>Paystack payment</th>
       <td>
-        {% if order.stripe_id %}
-          <a href="{{ order.get_stripe_url }}" target="_blank">
+        {% if order_payment.ref %}
+          <!-- <a href="{{ order.get_stripe_url }}" target="_blank">
             {{ order.stripe_id }}
+          </a> -->
+          <a href="{{ order_payment.ref }}" target="_blank">
+            {{ order_payment.ref }}
           </a>
         {% endif %}
       </td>
@@ -76,17 +79,17 @@
       </tr>
     </thead>
     <tbody>
-      {% for item in order.items.all %}
+      {% for item in order_payment.order.items.all %}
         <tr class="row{% cycle "1" "2" %}">
           <td>{{ item.product.name }}</td>
-          <td class="num">${{ item.price }}</td>
+          <td class="num"><span>&#8358;</span>{{ item.price }}</td>
           <td class="num">{{ item.quantity }}</td>
-          <td class="num">${{ item.get_cost }}</td>
+          <td class="num"><span>&#8358;</span>{{ item.get_cost }}</td>
         </tr>
       {% endfor %}
       <tr class="total">
         <td colspan="3">Total</td>
-        <td class="num">${{ order.get_total_cost }}</td>
+        <td class="num"><span>&#8358;</span>{{ order_payment.order.get_total_cost }}</td>
       </tr>
     </tbody>
   </table>

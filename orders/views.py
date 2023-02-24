@@ -90,19 +90,19 @@ def order_create_2(request):
 
 @staff_member_required
 def admin_order_detail(request, order_id):
-    order = get_object_or_404(Order_Payment, id=order_id) # You changed this from get_object_or_404(Order, id=order_id) to what you have
+    order_payment = get_object_or_404(Order_Payment, id=order_id) # You changed this from get_object_or_404(Order, id=order_id) to what you have
     return render(request,
                   'admin/orders/order/detail.html',
-                  {'order': order})
+                  {'order_payment': order_payment})
 
 
 @staff_member_required
 def admin_order_pdf(request, order_id):
-    order = get_object_or_404(Order_Payment, id=order_id) # You changed this from get_object_or_404(Order, id=order_id) to what you have
+    order_payment = get_object_or_404(Order_Payment, id=order_id) # You changed this from get_object_or_404(Order, id=order_id) to what you have
     html = render_to_string('orders/order/pdf.html',
-                            {'order': order})
+                            {'order_payment': order_payment})
     response = HttpResponse(content_type='application/pdf')
-    response['Content-Disposition'] = f'filename=order_{order.id}.pdf'
+    response['Content-Disposition'] = f'filename=order_{order_payment.id}.pdf'
     weasyprint.HTML(string=html).write_pdf(response,
         stylesheets=[weasyprint.CSS(
             settings.STATIC_ROOT / 'orders/pdf.css')])

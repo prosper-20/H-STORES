@@ -32,3 +32,9 @@ urlpatterns = [
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+
+
+admin.site.site_header  =  "Hertola Stores admin"  
+admin.site.site_title  =  "Hertola Stores admin site"
+admin.site.index_title  =  "Hertola Stores Admin"
