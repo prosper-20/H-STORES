@@ -76,6 +76,7 @@ def initiate_payment_4(request, id):
     else:
         context = {
             'order': order,
+            "orderitem": orderitem,
         }
         return render(request, "core/initiate_payment_4.html", context)
 
