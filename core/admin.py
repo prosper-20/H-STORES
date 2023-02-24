@@ -4,7 +4,6 @@ from orders.models import Order, OrderItem
 import csv
 import datetime
 from django.http import HttpResponse
-from .models import Order, OrderItem
 from django.urls import reverse
 from django.utils.safestring import mark_safe
 
@@ -52,8 +51,7 @@ order_pdf.short_description = 'Invoice'
 class OrderAdmin(admin.ModelAdmin):
     list_display = ['order', 'amount', 'ref',
                     order_detail, order_pdf]
-    list_filter = ['order.paid', 'verified', 'date_created']
-    inlines = [OrderItemInline]
+    list_filter = ['verified', 'date_created']
     actions = [export_to_csv]
 
 

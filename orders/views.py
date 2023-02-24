@@ -12,6 +12,7 @@ from django.conf import settings
 from django.views import View
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from core.models import Order_Payment
 
 
 def order_create(request):
@@ -83,12 +84,13 @@ def order_create_2(request):
 
 
 
+
         
 
 
 @staff_member_required
 def admin_order_detail(request, order_id):
-    order = get_object_or_404(Order, id=order_id)
+    order = get_object_or_404(Order_Payment, id=order_id) # You changed this from get_object_or_404(Order, id=order_id) to what you have
     return render(request,
                   'admin/orders/order/detail.html',
                   {'order': order})
@@ -96,7 +98,7 @@ def admin_order_detail(request, order_id):
 
 @staff_member_required
 def admin_order_pdf(request, order_id):
-    order = get_object_or_404(Order, id=order_id)
+    order = get_object_or_404(Order_Payment, id=order_id) # You changed this from get_object_or_404(Order, id=order_id) to what you have
     html = render_to_string('orders/order/pdf.html',
                             {'order': order})
     response = HttpResponse(content_type='application/pdf')

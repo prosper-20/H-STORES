@@ -14,6 +14,8 @@ class Order_Payment(models.Model):      # You just created this....
 
     class Meta:
         ordering = ["-date_created"]
+        verbose_name = "Ordered & Paid"
+        verbose_name_plural = "Ordered & Paid"
 
     def __str__(self):
         return f"Payment: {self.amount}"
