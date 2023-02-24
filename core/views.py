@@ -5,7 +5,7 @@ from .models import Payment, Order_Payment
 from django.contrib import messages
 from django.views import View
 from django.views.generic import CreateView
-from orders.models import Order
+from orders.models import Order, OrderItem
 
 def initiate_payment(request):
     if request.method == "POST":
@@ -59,6 +59,7 @@ def initiate_payment_3(request, id):
 
 def initiate_payment_4(request, id):
     order = Order.objects.get(id=id)
+    orderitem = OrderItem.objects.get(order=order)
     if request.method == "POST":
         amount = order.get_total_cost()
         email = order.email
@@ -67,6 +68,7 @@ def initiate_payment_4(request, id):
         context = {
             "payment": payment, 
             'order': order,
+            "orderitem": orderitem,
             'paystack_public_key': 'pk_test_db7eb580c0015ee09205de7791906de5b11d108d'
         }
         return render(request, "core/make_payment.html", context)
@@ -75,7 +77,7 @@ def initiate_payment_4(request, id):
         context = {
             'order': order,
         }
-        return render(request, "core/initiate_payment_3.html", context)
+        return render(request, "core/initiate_payment_4.html", context)
 
 
 
