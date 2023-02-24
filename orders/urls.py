@@ -8,5 +8,6 @@ urlpatterns = [
     path('admin/order/<int:order_id>/', views.admin_order_detail, name='admin_order_detail'),
     path('admin/order/<int:order_id>/pdf/', views.admin_order_pdf, name='admin_order_pdf'),
     path('request-refund/', views.RequestRefundView.as_view(), name='request-refund'),
-    path("history/", views.history, name="history")
+    path("history/", views.history, name="history"),
+    path("orders/history/", views.order_history, name="order-history")
 ]

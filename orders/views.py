@@ -13,6 +13,7 @@ from django.views import View
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from core.models import Order_Payment
+from core.models import Order_Payment
 
 
 def order_create(request):
@@ -157,3 +158,17 @@ def history(request):
         "completed_orders": completed_orders
     }
     return render(request, "orders/order/history.html", context)
+
+
+@login_required
+def order_history(request):
+    completed_orders = Order_Payment.objects.filter(email=request.user.email, verified=True)
+    incomplete_orders = Order.objects.filter(email=request.user.email, paid=False)
+
+    context = {
+        "incomplete_orders": incomplete_orders,
+        "completed_orders": completed_orders
+    }
+    return render(request, "orders/order/history2.html", context)
+
+
