@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import OrderItem, Order
-from .forms import OrderCreateForm, RefundForm
+from .forms import OrderCreateForm, RefundForm, OrderSummaryAndEditForm
 from .tasks import order_created
 from cart.cart import Cart
 from django.contrib.admin.views.decorators import staff_member_required
@@ -176,5 +176,39 @@ def order_history(request):
 def pay_later(request):
     messages.success(f"Your order has been placed")
     return render(request, 'shop/product/list.html')
+
+
+def order_summary(request, id):
+    current_order = Order.objects.get(id=id)
+    current_orderitem = OrderItem.objects.get(order=id)
+    context = {
+        "current_orderitem": current_orderitem,
+        "current_order": current_order
+    }
+    return render(request, "orders/order/order_summary.html", context)
+
+
+
+def order_summary_and_edit(request):
+    if request.method == "POST":
+        order_form = ProfileUpdateForm(request.POST,
+                                   request.FILES,
+                                   instance=request.user.profile)
+        if u_form.is_valid() and p_form.is_valid():
+            u_form.save()
+            p_form.save()
+            messages.success(request, f'Your account has been updated!')
+            return redirect('profile')
+
+    else:
+        u_form = UserUpdateForm(instance=request.user)
+        p_form = ProfileUpdateForm(instance=request.user.profile)
+
+    context = {
+        'u_form': u_form,
+        'p_form': p_form
+    }
+
+    return render(request, 'users/profile.html', context)
 
 

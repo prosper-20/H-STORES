@@ -112,7 +112,7 @@ def verify_payment(request, ref):
     payment = get_object_or_404(Payment, ref=ref)
     verified = payment.verify_payment()
     if verified:
-        messages.success(request, f"Verification successful")
+        messages.success(request, f"You have successfuly paid for your order")
     else:
         messages.error(request, "Verification failed")
     return redirect("shop:product_list")
@@ -121,7 +121,7 @@ def verify_payment2(request, ref):
     order_payment = get_object_or_404(Order_Payment, ref=ref)
     verified = order_payment.verify_payment()
     if verified:
-        messages.success(request, f"Verification successful")
+        messages.success(request, f"You have successfuly paid for your order")
     else:
         messages.error(request, "Verification failed")
     return redirect("shop:product_list")
