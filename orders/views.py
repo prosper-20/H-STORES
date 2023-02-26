@@ -14,6 +14,8 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from core.models import Order_Payment
 from core.models import Order_Payment
+from django.views.generic import UpdateView
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
 
 def order_create(request):
@@ -189,26 +191,47 @@ def order_summary(request, id):
 
 
 
-def order_summary_and_edit(request):
-    if request.method == "POST":
-        order_form = ProfileUpdateForm(request.POST,
-                                   request.FILES,
-                                   instance=request.user.profile)
-        if u_form.is_valid() and p_form.is_valid():
-            u_form.save()
-            p_form.save()
-            messages.success(request, f'Your account has been updated!')
-            return redirect('profile')
 
-    else:
-        u_form = UserUpdateForm(instance=request.user)
-        p_form = ProfileUpdateForm(instance=request.user.profile)
 
-    context = {
-        'u_form': u_form,
-        'p_form': p_form
-    }
 
-    return render(request, 'users/profile.html', context)
+# def order_summary_and_edit(request, id):
+#     if request.method == "POST":
+#         order_form = OrderSummaryAndEditForm(request.POST,
+#                                    request.FILES,
+#                                    instance=request.id)
+#         if order_form.is_valid():
+#             order_form.save()
+#             messages.success(request, f'Your account has been updated!')
+#             return redirect('profile')
+
+#     else:
+#          order_form = OrderSummaryAndEditForm(instance=request.id)
+
+#     context = {
+#         'order_form': order_form
+#     }
+
+#     return render(request, 'orders/order/order_summary_edit.html', context)
+
+class OrderItemUpdateView(LoginRequiredMixin, UpdateView):
+    model = OrderItem
+    fields = ['product', 'quantity']
+    template_name = "orders/order/order_form_2.html"
+
+
+class OrderSummaryUpdateView(LoginRequiredMixin, UpdateView):
+    model = Order
+    fields = ['first_name', 'last_name', 'email', 'address',
+                  'postal_code', 'city']
+
+    # def form_valid(self, form):
+    #     form.instance.author = self.request.user
+    #     return super().form_valid(form)
+
+    # def test_func(self):
+    #     post = self.get_object()
+    #     if self.request.user == post.author:
+    #         return True
+    #     return False
 
 
