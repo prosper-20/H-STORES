@@ -194,4 +194,4 @@ def getPrices(request):
     lga_id = data["id"]
     print(lga_id)
     prices = Delivery_Fee.objects.filter(lga__id=lga_id)
-    return JsonResponse(list(prices.values("id", "price")), safe=False )
+    return JsonResponse(list(prices.values("id", "price")), safe=False)

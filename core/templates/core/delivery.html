@@ -24,6 +24,7 @@
         {{field}}
         <br>
         {% endfor %}
+        {{ form.errors }}
 
         <input type="submit" value="Save" class ="btn btn-primary">
     </form>
@@ -47,6 +48,7 @@
 
 
         let lga_field = document.getElementById("id_L_G_A")
+        let price_field = document.getElementById("id_delivery_fee")
         lga_field.addEventListener("change", getLGAId)
 
         function getLGAId(e){
@@ -68,7 +70,11 @@
         })
         .then((response) => response.json())
         .then((data) => {
-            console.log('Success:', data);
+            console.log('Success:', data[0]);
+            price_field.innerHTML = '<option value="" selected>---------</option>'
+            for(let i = 0; i < data.length; i++){
+                price_field.innerHTML += `<option value=" ${data[i]['id']}" selected="">"${data[i]["price"]}"</option>`
+            }
         })
         .catch((error) => {
             console.error('Error:', error);
