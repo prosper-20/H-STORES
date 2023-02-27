@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'orders.apps.OrdersConfig',
     'core.apps.CoreConfig',
     'crispy_forms',
+    'crispy_bootstrap5',
     'payment.apps.PaymentConfig',
     'coupons.apps.CouponsConfig'
 ]
@@ -147,15 +148,20 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Bottom of settings.py 
 # Twilio SendGrid
-EMAIL_HOST = 'smtp.sendgrid.net'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'apikey' # Name for all the SenGrid accounts
-EMAIL_HOST_PASSWORD = config('SENDGRID_API_KEY')
+# EMAIL_HOST = 'smtp.sendgrid.net'
+# EMAIL_PORT = 587
+# EMAIL_USE_TLS = True
+# EMAIL_HOST_USER = 'apikey' # Name for all the SenGrid accounts
+# EMAIL_HOST_PASSWORD = config('SENDGRID_API_KEY')
 
-# The email you'll be sending emails from
-DEFAULT_FROM_EMAIL = config('FROM_EMAIL', default='noreply@gmail.com')
+# # The email you'll be sending emails from
+# DEFAULT_FROM_EMAIL = config('FROM_EMAIL', default='noreply@gmail.com')
 LOGIN_REDIRECT_URL = '/'
+
+# For Sendgrid's API
+EMAIL_BACKEND = "sendgrid_backend.SendgridBackend"
+SENDGRID_SANDBOX_MODE_IN_DEBUG = False
+EMAIL_HOST_PASSWORD = config('SENDGRID_API_KEY')
 
 
 
