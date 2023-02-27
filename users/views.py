@@ -122,8 +122,8 @@ class SignUpView(CreateView):
     template_name = 'users/signup.html'
     success_url = reverse_lazy('check_email')
 
-    def form_valid(self, form):
-        to_return = super().form_valid(form)
+    def form_valid(self, form, *args, **kwargs):
+        to_return = super().form_valid(form, *args, **kwargs)
         
         user = form.save()
         user.is_active = False # Turns the user status to inactive
@@ -150,7 +150,6 @@ class ActivateView(RedirectView):
         if user is not None and token_generator.check_token(user, token):
             user.is_active = True
             user.save()
-            Profile.objects.create(user=user)
             login(request, user)
             return super().get(request, uidb64, token)
         else:
