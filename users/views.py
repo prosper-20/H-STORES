@@ -84,7 +84,7 @@ def register2(request):
 
 
 
-def login(request):
+def login2(request):
     if request.method == "POST":
         username = request.POST.get("username")
         password = request.POST.get("password")

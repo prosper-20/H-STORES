@@ -12,6 +12,9 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 import os
 from pathlib import Path
 from decouple import config
+from dotenv import load_dotenv
+
+load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -152,7 +155,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # EMAIL_PORT = 587
 # EMAIL_USE_TLS = True
 # EMAIL_HOST_USER = 'apikey' # Name for all the SenGrid accounts
-# EMAIL_HOST_PASSWORD = config('SENDGRID_API_KEY')
 
 # # The email you'll be sending emails from
 # DEFAULT_FROM_EMAIL = config('FROM_EMAIL', default='noreply@gmail.com')
@@ -161,8 +163,8 @@ LOGIN_REDIRECT_URL = '/'
 # For Sendgrid's API
 EMAIL_BACKEND = "sendgrid_backend.SendgridBackend"
 SENDGRID_SANDBOX_MODE_IN_DEBUG = False
-EMAIL_HOST_PASSWORD = config('SENDGRID_API_KEY')
-SENDGRID_API_KEY = config("SENDGRID_API_KEY")
+SENDGRID_API_KEY = os.environ.get('MY_SENDGRID_API_KEY')
+DEFAULT_FROM_EMAIL = config('FROM_EMAIL')
 
 
 
