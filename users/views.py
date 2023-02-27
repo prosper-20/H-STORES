@@ -22,6 +22,7 @@ from django.utils.http import urlsafe_base64_decode
 from django.utils.encoding import force_str # force_text on older versions of Django
 
 from .forms2 import SignUpForm, token_generator, user_model
+from .models import Profile
 
 
 
@@ -149,6 +150,7 @@ class ActivateView(RedirectView):
         if user is not None and token_generator.check_token(user, token):
             user.is_active = True
             user.save()
+            Profile.objects.create(user=user)
             login(request, user)
             return super().get(request, uidb64, token)
         else:
