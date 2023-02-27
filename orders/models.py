@@ -1,6 +1,7 @@
 from django.db import models
 from shop.models import Product
 import secrets
+from django.urls import reverse
 from decimal import Decimal
 from coupons.models import Coupon
 from django.core.validators import MinValueValidator, \
@@ -47,6 +48,9 @@ class Order(models.Model):
     def get_total_cost(self):
         total_cost = self.get_total_cost_before_discount()
         return total_cost - self.get_discount()
+    
+    def get_absolute_url(self):
+        return reverse('post-detail', kwargs={'pk': self.pk})
 
     def save(self, *args, **kwargs):
         while not self.ref:

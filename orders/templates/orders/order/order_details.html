@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Details</title>
+</head>
+<body>
+    <h1>Confirm Order Details</h1>
+    {{ current_order.first_name}}
+    <br>
+    {{ current_order.last_name }}
+    <a class="btn btn-warning" href="{% url 'orders:order-summary-edit' order.pk %}">Edit</a>
+    <br>
+    <a href="{% url 'initiate-payment-4' order.id %}">Proceed to Payment</a>
+</body>
+</html>

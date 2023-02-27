@@ -190,6 +190,15 @@ def order_summary(request, id):
     return render(request, "orders/order/order_summary.html", context)
 
 
+def order_details(request, id):
+    current_order = Order.objects.get(id=id)
+    context = {
+        "current_order": current_order
+    }
+    return render(request, "orders/order/order_details.html", context)
+
+
+
 
 
 

@@ -11,7 +11,9 @@
   
 
   <div>
-    <a class="btn btn-primary" href="{% url 'order-summary-edit' object.pk %}">Pay Now</a>
+    <!-- <a class="btn btn-primary" href="{% url 'orders:order-summary-edit' order.pk %}">Proceed To Payment</a> -->
+    <a href="{% url 'orders:order-details' order.pk %}">Procced to Payment</a>
+    <br>
     <br>
     <a class="btn btn-primary" href="{% url 'initiate-payment-4' order.id %}">Pay Now</a>
     <br>
