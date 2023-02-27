@@ -11,8 +11,8 @@
   
 
   <div>
-    <!-- <a class="btn btn-primary" href="{% url 'orders:order-summary-edit' order.pk %}">Proceed To Payment</a> -->
-    <a href="{% url 'orders:order-details' order.pk %}">Procced to Payment</a>
+    
+    <a href="{% url 'orders:order-details' order.id %}">Procced to Payment</a>
     <br>
     <br>
     <a class="btn btn-primary" href="{% url 'initiate-payment-4' order.id %}">Pay Now</a>
@@ -22,3 +22,5 @@
     <a class="btn btn-warning" href="{% url 'orders:pay-later' }">Pay Later</a>
   </div>
 {% endblock %}
+
+<!-- <a class="btn btn-primary" href="{% url 'orders:order-summary-edit' order.pk %}">Proceed To Payment</a> -->

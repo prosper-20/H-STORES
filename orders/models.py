@@ -50,7 +50,7 @@ class Order(models.Model):
         return total_cost - self.get_discount()
     
     def get_absolute_url(self):
-        return reverse('post-detail', kwargs={'pk': self.pk})
+        return reverse('order-details', kwargs={'id': self.pk})
 
     def save(self, *args, **kwargs):
         while not self.ref:

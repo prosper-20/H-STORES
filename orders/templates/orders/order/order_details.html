@@ -11,8 +11,8 @@
     {{ current_order.first_name}}
     <br>
     {{ current_order.last_name }}
-    <a class="btn btn-warning" href="{% url 'orders:order-summary-edit' order.pk %}">Edit</a>
+    <a class="btn btn-warning" href="{% url 'orders:order-summary-edit' current_order.pk %}">Edit</a>
     <br>
-    <a href="{% url 'initiate-payment-4' order.id %}">Proceed to Payment</a>
+    <a href="{% url 'initiate-payment-4' current_order.id %}">Proceed to Payment</a>
 </body>
 </html>
