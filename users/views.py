@@ -21,7 +21,7 @@ from django.urls import reverse_lazy
 from django.utils.http import urlsafe_base64_decode
 from django.utils.encoding import force_str # force_text on older versions of Django
 
-from .forms import SignUpForm, token_generator, user_model
+from .forms2 import SignUpForm, token_generator, user_model
 
 
 
