@@ -35,7 +35,7 @@ class CustomUser(AbstractUser):
 
 
 class Profile(models.Model):
-    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
+    user = models.OneToOneField(CustomUser, primary_key=True, on_delete=models.CASCADE)
     phone_number = models.CharField(max_length=11, help_text="e.g 0903...")
     image = models.ImageField(default='default.png', upload_to='profile_pics')
 
@@ -52,13 +52,3 @@ class Profile(models.Model):
             img.thumbnail(output_size)
             img.save(self.image.path)
 
-
-@receiver(post_save, sender=User)
-def create_profile(sender, instance, created, **kwargs):
-    if created:
-        Profile.objects.create(user=instance)
-
-
-@receiver(post_save, sender=User)
-def save_profile(sender, instance, **kwargs):
-    instance.profile.save()

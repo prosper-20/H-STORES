@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import home, register2, register, login2, logout
+from .views import home, register2, register, login2, logout, profile
 from django.contrib.auth import views as auth_views
 
 # This part is for the email activation flow
@@ -14,6 +14,7 @@ from .views import (
 urlpatterns = [
     path("", home, name="home"),
     path("register2/", register2, name="register2"),
+    path("profile/", profile, name="profile"),
     path("register/", register, name="register"),
     path("login/", login2, name="login"),
     path("logout/", logout, name="logout"),
