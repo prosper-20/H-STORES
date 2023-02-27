@@ -160,6 +160,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # DEFAULT_FROM_EMAIL = config('FROM_EMAIL', default='noreply@gmail.com')
 LOGIN_REDIRECT_URL = '/'
 
+LOGIN_URL = "login"
+
 # For Sendgrid's API
 EMAIL_BACKEND = "sendgrid_backend.SendgridBackend"
 SENDGRID_SANDBOX_MODE_IN_DEBUG = False
