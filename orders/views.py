@@ -162,10 +162,17 @@ def history(request):
     return render(request, "orders/order/history.html", context)
 
 
+# Order detail view for the user
+def user_order_detail(request, order_id):
+    order_payment = get_object_or_404(Order_Payment, id=order_id) # You changed this from get_object_or_404(Order, id=order_id) to what you have
+    return render(request,
+                  'admin/orders/order/user_detail.html',
+                  {'order_payment': order_payment})
+
 @login_required
 def order_history(request):
     completed_orders = Order_Payment.objects.filter(email=request.user.email, verified=True)
-    incomplete_orders = Order.objects.filter(email=request.user.email, paid=False)
+    incomplete_orders = Order.objects.filter(email=request.user.email, verified=False)
 
     context = {
         "incomplete_orders": incomplete_orders,

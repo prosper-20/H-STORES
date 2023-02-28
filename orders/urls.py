@@ -10,6 +10,7 @@ urlpatterns = [
     path("<int:id>/summary/", views.order_summary, name="order-summary"),
     path("<int:pk>/items/edit", views.OrderItemUpdateView.as_view(), name="orderitem-edit"),
     path('admin/order/<int:order_id>/', views.admin_order_detail, name='admin_order_detail'),
+    path('user/order/<int:order_id>/', views.user_order_detail, name='user-order-detail'),
     path('admin/order/<int:order_id>/pdf/', views.admin_order_pdf, name='admin_order_pdf'),
     path('request-refund/', views.RequestRefundView.as_view(), name='request-refund'),
     path("history/", views.history, name="history"),

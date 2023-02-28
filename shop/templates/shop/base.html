@@ -33,7 +33,7 @@
             role="button" data-toggle="dropdown" aria-haspopup="true"
             aria-expanded="false"><i class="fa fa-user" style="color: black" aria-hidden="true"></i></a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="">My Account</a>
+              <a class="dropdown-item" target="_blank" href="{% url 'profile' %}">My Account</a>
               <a class="dropdown-item" href="{% url 'orders:order-history' %}">My orders</a>
               <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
             </div>
