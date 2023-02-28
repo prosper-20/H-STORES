@@ -172,7 +172,7 @@ def user_order_detail(request, order_id):
 @login_required
 def order_history(request):
     completed_orders = Order_Payment.objects.filter(email=request.user.email, verified=True)
-    incomplete_orders = Order.objects.filter(email=request.user.email, verified=False)
+    incomplete_orders = Order.objects.filter(email=request.user.email, paid=False)
 
     context = {
         "incomplete_orders": incomplete_orders,

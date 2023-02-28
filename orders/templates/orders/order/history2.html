@@ -10,7 +10,9 @@
     <h1>Completed Orders</h1>
     You have {{ completed_orders.count }} completed orders
     {% for order in completed_orders %}
-        <p>{{ order.email }} - {{ order.created }} </p> <a href="{% url 'user-order-detail' order_id%}">View</a>
+        <p>Ordered Date: {{ order.order.created }}</p>
+        <p>Email: {{ order.email }}</p>
+        <a href="{% url 'orders:user-order-detail' order.id %}">View</a>
     {% endfor %}
 
     <h1>Incomplete Orders</h1>
