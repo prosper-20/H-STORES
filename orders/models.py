@@ -18,6 +18,8 @@ class Order(models.Model):
     updated = models.DateTimeField(auto_now=True)
     paid = models.BooleanField(default=False)
     ref = models.CharField(max_length=200)
+    refund_requested = models.BooleanField(default=False)
+    refund_granted = models.BooleanField(default=False)
     coupon = models.ForeignKey(Coupon,
                                related_name='orders',
                                null=True,

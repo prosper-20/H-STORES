@@ -16,6 +16,7 @@ from core.models import Order_Payment
 from core.models import Order_Payment
 from django.views.generic import UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.core.exceptions import ObjectDoesNotExist
 
 
 def order_create(request):
@@ -93,7 +94,8 @@ def order_create_2(request):
 
 @staff_member_required
 def admin_order_detail(request, order_id):
-    order_payment = get_object_or_404(Order_Payment, id=order_id) # You changed this from get_object_or_404(Order, id=order_id) to what you have
+    # order_payment = get_object_or_404(Order_Payment, id=order_id) # You changed this from get_object_or_404(Order, id=order_id) to what you have
+    order_payment = Order_Payment.objects.get(order=order_id)
     return render(request,
                   'admin/orders/order/detail.html',
                   {'order_payment': order_payment})
@@ -130,7 +132,7 @@ class RequestRefundView(View):
             email = form.cleaned_data.get('email')
             # edit the order
             try:
-                order = Order.objects.get(ref_code=ref_code)
+                order = Order.objects.get(ref=ref_code)
                 order.refund_requested = True
                 order.save()
 
@@ -141,8 +143,8 @@ class RequestRefundView(View):
                 refund.email = email
                 refund.save()
 
-                messages.info(self.request, "Your request was received.")
-                return redirect("orders:request-refund")
+                messages.info(self.request, "Your request was received.  An agent will get back to you within an hour. Thank you!")
+                return redirect("shop:product_list")
 
             except ObjectDoesNotExist:
                 messages.info(self.request, "This order does not exist.")

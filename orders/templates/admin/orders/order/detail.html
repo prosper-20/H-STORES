@@ -65,6 +65,16 @@
         {% endif %}
       </td>
     </tr>
+    <tr>
+      <th>Refund Requested</th>
+      <td>
+        {% if order_payment.order.refund_requested %}
+           True 
+        {% else %}
+          False
+        {% endif %}
+      </td>
+    </tr>
   </table>
 </div>
 <div class="module">
