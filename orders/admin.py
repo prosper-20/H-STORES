@@ -2,7 +2,7 @@ from django.contrib import admin
 import csv
 import datetime
 from django.http import HttpResponse
-from .models import Order, OrderItem
+from .models import Order, OrderItem, Refund
 from django.urls import reverse
 from django.utils.safestring import mark_safe
 
@@ -50,4 +50,12 @@ class OrderAdmin(admin.ModelAdmin):
     list_filter = ['paid', 'created', 'refund_requested', 'updated']
     inlines = [OrderItemInline]
     actions = [export_to_csv]
+
+
+
+class RefundAdmin(admin.ModelAdmin):
+    list_display = ["order", "email"]
+
+
+admin.site.register(Refund, RefundAdmin)
 
