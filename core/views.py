@@ -64,7 +64,7 @@ def initiate_payment_3(request, id):
 
 def initiate_payment_4(request, id):
     order = Order.objects.get(id=id)
-    orderitem = OrderItem.objects.get(order=order)
+    orderitem = OrderItem.objects.filter(order=order)
     if request.method == "POST":
         amount = order.get_total_cost()
         email = order.email
@@ -159,8 +159,10 @@ def verify_payment2(request, ref):
 
 def email_tester(request, id):
     order_payment = Order_Payment.objects.get(order=id)
+    order_items = OrderItem.objects.filter(order=id)
     context = {
-        "order_payment": order_payment
+        "order_payment": order_payment,
+        "order_items": order_items
     }
     return render(request, 'core/order_on_its_way_2.html', context)
 

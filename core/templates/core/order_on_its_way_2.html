@@ -339,8 +339,9 @@ a[x-apple-data-detectors='true'] {
       <td style="overflow-wrap:break-word;word-break:break-word;padding:5px 10px;font-family:arial,helvetica,sans-serif;" align="left">
         
   <div style="line-height: 140%; text-align: left; word-wrap: break-word;">
-    {% for order_item in order.items.all %}
-    <p style="font-size: 14px; line-height: 140%;"><span style="font-size: 16px; line-height: 22.4px;">{{order_item.item.title}}</span></p>
+    {% for item in order_items %}
+    <p style="font-size: 14px; line-height: 140%;"><span style="font-size: 16px; line-height: 22.4px;">{{item.product}}</span></p>
+    <br>
     {% endfor %}
   </div>
 
@@ -364,8 +365,9 @@ a[x-apple-data-detectors='true'] {
       <td style="overflow-wrap:break-word;word-break:break-word;padding:5px 10px;font-family:arial,helvetica,sans-serif;" align="left">
         
   <div style="line-height: 140%; text-align: left; word-wrap: break-word;">
-    {% for order_item in order.items.all %}
-    <p style="font-size: 14px; line-height: 140%;"><span style="font-size: 16px; line-height: 22.4px;">{{order_item.quantity}}</span></p>
+    {% for item in order_items %}
+    <p style="font-size: 14px; line-height: 140%;"><span style="font-size: 16px; line-height: 22.4px;">{{item.quantity}}</span></p>
+    <br>
     {% endfor %}
   </div>
 
@@ -389,8 +391,9 @@ a[x-apple-data-detectors='true'] {
       <td style="overflow-wrap:break-word;word-break:break-word;padding:5px 20px 5px 10px;font-family:arial,helvetica,sans-serif;" align="left">
         
   <div style="line-height: 140%; text-align: right; word-wrap: break-word;">
-    {% for order_item in order.items.all %}
-    <p style="font-size: 14px; line-height: 140%;"><span style="font-size: 16px; line-height: 22.4px;"><span>&#8358;</span>{{ order_item.get_total_item_price }}</span></p>
+    {% for item in order_items %}
+    <p style="font-size: 14px; line-height: 140%;"><span style="font-size: 16px; line-height: 22.4px;"><span>&#8358;</span>{{ item.get_cost }}</span></p>
+    <br>
     {% endfor %}
   </div>
 

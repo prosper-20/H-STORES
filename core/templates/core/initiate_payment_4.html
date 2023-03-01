@@ -8,7 +8,14 @@
         <form action="" method="post" id="paymentForm">
             {% csrf_token %}
             <p>Order Details</p>
+            {% if orderitem.count == 1 %}
             <strong>{{ orderitem.quantity }} x {{ orderitem.product }}</strong>
+            {% else %}
+                {% for item in orderitem %}
+                <strong>{{ item.quantity }} x {{ item.product }}</strong>
+                <br>
+                {% endfor %}
+            {% endif %}
             <p>Amount</p>
             <input type="number" name="amount" value="{{ order.get_total_cost }}" disabled="True" min="0" required id="id_amount">
             <p>Email</p>
