@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import initiate_payment_2, verify_payment, initiate_payment_3, verfiy_order_payment, initiate_payment_4, verify_payment2, delivery, getPrices
+from .views import initiate_payment_2, verify_payment, initiate_payment_3, verfiy_order_payment, initiate_payment_4, verify_payment2, delivery, getPrices, email_tester
 
 
 urlpatterns = [
@@ -10,6 +10,7 @@ urlpatterns = [
     path("<str:ref>/", verify_payment2, name="verify-payment"), # You change this from verify_payment to verify_payment2
     path("<int:id>/verifier/", verfiy_order_payment, name="verifier"),
     path("<int:id>/pay3/", initiate_payment_3, name="initiate_payment_3"),
+    path("<int:id>/email/", email_tester, name='email')
     
     
     

@@ -467,7 +467,7 @@ a[x-apple-data-detectors='true'] {
       <td style="overflow-wrap:break-word;word-break:break-word;padding:10px 10px 15px;font-family:arial,helvetica,sans-serif;" align="left">
         
   <div style="line-height: 140%; text-align: left; word-wrap: break-word;">
-    <p style="font-size: 14px; line-height: 140%; text-align: right;"><span style="font-size: 16px; line-height: 22.4px;">Shipping:</span></p>
+    <p style="font-size: 20px; line-height: 140%; text-align: right;">Order Total: <span>&#8358;</span> {{ order_payment.amount }}</p>
   </div>
 
       </td>
@@ -490,7 +490,7 @@ a[x-apple-data-detectors='true'] {
       <td style="overflow-wrap:break-word;word-break:break-word;padding:10px 21px 15px 10px;font-family:arial,helvetica,sans-serif;" align="left">
         
   <div style="line-height: 140%; text-align: left; word-wrap: break-word;">
-    <p style="font-size: 14px; line-height: 140%; text-align: right;"><span style="font-size: 16px; line-height: 22.4px;"><span>&#8358;</span>{{order.shipping.price}}</span></p>
+    <!-- <p style="font-size: 14px; line-height: 140%; text-align: right;"><span style="font-size: 16px; line-height: 22.4px;"><span>&#8358;</span>{{order.shipping.price}}</span></p> -->
   </div>
 
       </td>
@@ -525,7 +525,7 @@ a[x-apple-data-detectors='true'] {
       <td style="overflow-wrap:break-word;word-break:break-word;padding:10px;font-family:arial,helvetica,sans-serif;" align="left">
         
   <div style="line-height: 140%; text-align: left; word-wrap: break-word;">
-    <p style="font-size: 14px; line-height: 140%; text-align: right;"><span style="font-size: 16px; line-height: 22.4px;"><strong>Total amount:</strong></span></p>
+    <p style="font-size: 14px; line-height: 140%; text-align: right;"><span style="font-size: 16px; line-height: 22.4px;"><strong>Total amount: {{ order_payment.amount }}</strong></span></p>
   </div>
 
       </td>
@@ -549,7 +549,7 @@ a[x-apple-data-detectors='true'] {
         
   <div style="line-height: 140%; text-align: left; word-wrap: break-word;">
     {% if order.get_total %}
-    <p style="font-size: 14px; line-height: 140%; text-align: right;"><span style="font-size: 16px; line-height: 22.4px;"><strong><span>&#8358;</span>{{ order_payment.order.get_total_cost }}</strong></span></p>
+    <p style="font-size: 14px; line-height: 140%; text-align: right;"><span style="font-size: 16px; line-height: 22.4px;"><strong style="color: #000000;"><span>&#8358;</span>{{ order_payment.amount }}</strong></span></p>
     {% endif %}
   </div>
 
@@ -600,6 +600,8 @@ a[x-apple-data-detectors='true'] {
         
   <h3 style="margin: 0px; color: #000000; line-height: 140%; text-align: left; word-wrap: break-word; font-weight: normal; font-family: arial,helvetica,sans-serif; font-size: 15px;">
     {{ order_payment.order.address }}
+    <br>
+    {{ order_payment.order.postal_code}}
   </h3>
 
       </td>
@@ -637,6 +639,8 @@ a[x-apple-data-detectors='true'] {
         
   <h3 style="margin: 0px; color: #000000; line-height: 140%; text-align: left; word-wrap: break-word; font-weight: normal; font-family: arial,helvetica,sans-serif; font-size: 15px;">
     {{ order_payment.order.address }}
+    <br>
+    {{ order_payment.order.postal_code}}
   </h3>
 
       </td>
@@ -722,7 +726,7 @@ a[x-apple-data-detectors='true'] {
         
   <div style="line-height: 140%; text-align: left; word-wrap: break-word;">
     <p style="font-size: 14px; line-height: 140%; text-align: center;"><span style="font-size: 14px; line-height: 19.6px;">Our mailing address is:</span></p>
-<p style="font-size: 14px; line-height: 140%; text-align: center;"><span style="font-size: 14px; line-height: 19.6px;">P'sdiner@gmail.com</span></p>
+<p style="font-size: 14px; line-height: 140%; text-align: center;"><span style="font-size: 14px; line-height: 19.6px;">hertolastores@gmail.com</span></p>
   </div>
 
       </td>
