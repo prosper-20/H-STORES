@@ -9,6 +9,8 @@ from orders.models import Order, OrderItem
 from django.http import JsonResponse
 import json
 from core.models import Delivery_Fee
+from django.template.loader import render_to_string
+from django.core.mail import EmailMessage, send_mail
 
 def initiate_payment(request):
     if request.method == "POST":
@@ -119,12 +121,28 @@ def verify_payment(request, ref):
 
 def verify_payment2(request, ref):
     order_payment = get_object_or_404(Order_Payment, ref=ref)
+    post_mail = order_payment.order.email
     verified = order_payment.verify_payment()
     if verified:
         messages.success(request, f"You have successfuly paid for your order")
+        #  You just added this for the email sending
+        html_template = 'core/order_on_its_way_2.html'
+        my_dict = {"order_payment": order_payment}
+        html_message = render_to_string(html_template, context=my_dict)
+        subject = "Order Confirmation"
+        email_from = settings.EMAIL_HOST_USER
+        # recipient_list = ["babatundemubaraq1650@gmail.com"]
+        recipient_list = [post_mail]
+        message = EmailMessage(subject, html_message,
+                            email_from, recipient_list)
+        message.content_subtype = "html"
+        message.send()
     else:
         messages.error(request, "Verification failed")
     return redirect("shop:product_list")
+
+
+
 
 
 
@@ -137,6 +155,14 @@ def verify_payment2(request, ref):
 #     else:
 #         messages.error(request, "Verification failed")
 #     return redirect("shop:product_list")
+
+
+def email_tester(request, id):
+    order_payment = Order_Payment.objects.get(order=id)
+    context = {
+        "order_payment": order_payment
+    }
+    return render(request, 'core/order_on_its_way_2.html', context)
 
 
 
