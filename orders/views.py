@@ -39,6 +39,7 @@ def order_create(request):
             # launch asynchronous task
             order_created.delay(order.id)
             first_name = form.cleaned_data["first_name"]
+            messages.warning(request, "Disclaimer: Pls do not reload this page")
             return render(request,
                           'orders/order/created.html',
                           {'order': order,

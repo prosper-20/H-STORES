@@ -121,13 +121,16 @@ def verify_payment(request, ref):
 
 def verify_payment2(request, ref):
     order_payment = get_object_or_404(Order_Payment, ref=ref)
+    current_order = order_payment.order 
+    order_items = OrderItem.objects.filter(order=current_order)
     post_mail = order_payment.order.email
     verified = order_payment.verify_payment()
     if verified:
         messages.success(request, f"You have successfuly paid for your order")
         #  You just added this for the email sending
         html_template = 'core/order_on_its_way_2.html'
-        my_dict = {"order_payment": order_payment}
+        my_dict = {"order_payment": order_payment,
+                   "order_items": order_items}
         html_message = render_to_string(html_template, context=my_dict)
         subject = "Order Confirmation"
         email_from = settings.EMAIL_HOST_USER
