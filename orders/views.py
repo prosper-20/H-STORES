@@ -254,3 +254,8 @@ class OrderSummaryUpdateView(LoginRequiredMixin, UpdateView):
     #     return False
 
 
+
+def request_refund_completed(request):
+    return render(request, "orders/order/request_refund_completed.html")
+
+
