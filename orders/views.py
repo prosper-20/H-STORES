@@ -121,7 +121,8 @@ class RequestRefundView(View):
     def get(self, *args, **kwargs):
         form = RefundForm()
         context = {
-            'form': form
+            'form': form,
+            'title': 'Profile'
         }
         return render(self.request, "orders/order/request_refund.html", context)
 
@@ -255,7 +256,5 @@ class OrderSummaryUpdateView(LoginRequiredMixin, UpdateView):
 
 
 
-def request_refund_completed(request):
-    return render(request, "orders/order/request_refund_completed.html")
 
 
