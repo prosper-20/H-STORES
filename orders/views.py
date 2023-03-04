@@ -17,8 +17,10 @@ from core.models import Order_Payment
 from django.views.generic import UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.core.exceptions import ObjectDoesNotExist
+from shop.models import Product, Category
+from django.contrib.auth.decorators import login_required
 
-
+@login_required
 def order_create(request):
     cart = Cart(request)
     if request.method == 'POST':
@@ -186,9 +188,18 @@ def order_history(request):
 
 
 
-def pay_later(request):
-    messages.success(f"Your order has been placed")
-    return render(request, 'shop/product/list.html')
+def pay_later(request, category_slug=None):
+    category = None
+    categories = Category.objects.all()
+    products = Product.objects.filter(available=True)
+    if category_slug:
+        category = get_object_or_404(Category, slug=category_slug)
+        products = products.filter(category=category)
+    messages.success(request, f"Your order has been saved. Kindly check your hisory to view your order")
+    context = {'category': category,
+                   'categories': categories,
+                   'products': products}
+    return render(request, 'shop/product/list.html', context)
 
 
 def order_summary(request, id):
@@ -203,8 +214,11 @@ def order_summary(request, id):
 
 def order_details(request, pk):
     current_order = Order.objects.get(id=pk)
+    current_orderitem = OrderItem.objects.filter(order=current_order)
+
     context = {
-        "current_order": current_order
+        "current_order": current_order,
+        "current_orderitem": current_orderitem
     }
     return render(request, "orders/order/order_details.html", context)
 
@@ -243,6 +257,8 @@ class OrderSummaryUpdateView(LoginRequiredMixin, UpdateView):
     model = Order
     fields = ['first_name', 'last_name', 'email', 'address',
                   'postal_code', 'city']
+    
+    
 
     # def form_valid(self, form):
     #     form.instance.author = self.request.user

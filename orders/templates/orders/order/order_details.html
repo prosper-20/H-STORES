@@ -1,5 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
+    <style>
+        table, th, td {
+          border:1px solid black;
+        }
+        </style>
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,12 +12,30 @@
     <title>Order Details</title>
 </head>
 <body>
-    <h1>Confirm Order Details</h1>
-    {{ current_order.first_name}}
-    <br>
-    {{ current_order.last_name }}
+    <h1>Your Order Details</h1>
+    <h2>Personal Info</h2>
+    <h3>First Name: {{ current_order.first_name}}</h3>
+    <h3>Last Name: {{ current_order.last_name}}</h3>
+    <h3>Email Address: {{ current_order.email }} </h3>
+
+    <h2>Cart Info</h2>
+    <table>
+        <tr>
+          <th>Product</th>
+          <th>Quantity</th>
+          <th>Price</th>
+        </tr>
+        {% for item in current_orderitem %}
+        <tr>
+          <td>{{ item.product.name }}</td>
+          <td>{{ item.quantity }}</td>
+          <td>{{ item.get_cost }}</td>
+        </tr>
+        {% endfor %}
+      </table>
     <a class="btn btn-warning" href="{% url 'orders:order-summary-edit' current_order.pk %}">Edit</a>
     <br>
-    <a href="{% url 'initiate-payment-4' current_order.id %}">Proceed to Payment</a>
+    <a href="{% url 'initiate-payment-4' current_order.id %}">Proceed</a>
+    <!-- <a href="{% url 'initiate-payment-4' current_order.id %}">Proceed to Payment</a> -->
 </body>
 </html>
