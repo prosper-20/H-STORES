@@ -104,8 +104,13 @@ class Delivery_Fee(models.Model):
 
 class Delivery(models.Model):
     order = models.ForeignKey(Order_Payment, on_delete=models.CASCADE)
+    address = models.TextField()
     L_G_A = models.ForeignKey(LGA, on_delete=models.CASCADE)
     delivery_fee = models.ForeignKey(Delivery_Fee, on_delete=models.CASCADE)
+
+    def final_price_including_delivery(self):
+        return self.order.order.get_total_cost + self.delivery_fee
+
 
     def __str__(self):
         return f"{self.order}"
