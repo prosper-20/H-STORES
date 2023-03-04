@@ -13,7 +13,6 @@ urlpatterns = [
     path('user/order/<int:order_id>/', views.user_order_detail, name='user-order-detail'),
     path('admin/order/<int:order_id>/pdf/', views.admin_order_pdf, name='admin_order_pdf'),
     path('request-refund/', views.RequestRefundView.as_view(), name='request-refund'),
-    path("request-refund/complete/", views.request_refund_completed, name="request-refund-complete"),
     path("history/", views.history, name="history"),
     path("orders/history/", views.order_history, name="order-history"),
     path("pay-later/", views.pay_later, name="pay-later")
