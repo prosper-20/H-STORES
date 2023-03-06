@@ -8,9 +8,10 @@ from django.views.generic import CreateView
 from orders.models import Order, OrderItem
 from django.http import JsonResponse
 import json
-from core.models import Delivery_Fee
+from core.models import Delivery_Fee, Delivery
 from django.template.loader import render_to_string
 from django.core.mail import EmailMessage, send_mail
+from django.http import HttpResponse
 
 def initiate_payment(request):
     if request.method == "POST":
@@ -217,6 +218,23 @@ def delivery(request):
         if form.is_valid():
             form.save()
     return render(request, "core/delivery.html", {"form": form})
+
+
+
+def delivery2(request, id):
+    current_order = Order.objects.get(id=id)
+    if request.method == "POST":
+        address = current_order.address
+        L_G_A = request.POST.get("L_G_A")
+        delivery_fee = request.POST.get("delivery_fee")
+        current_order_delivery = Delivery.objects.create(order=current_order, address=address, L_G_A=L_G_A, delivery_fee=delivery_fee)
+        context = {
+            "current_order": current_order,
+            "current_order_delivery": current_order_delivery
+            }
+        return redirect(("order_details_delivery", context))
+    else:
+        return render(request, "core/delivery2.html")    
 
 
 

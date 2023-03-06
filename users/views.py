@@ -105,7 +105,7 @@ def login2(request):
             return redirect("login")
         
     else:
-        return render(request, 'users/login.html')
+        return render(request, 'users/new_login.html') # You changed this to from login.html
 
 
 def logout(request):
