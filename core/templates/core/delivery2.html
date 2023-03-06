@@ -8,13 +8,88 @@
 </head>
 <body>
     <h1>Delivery Info form</h1>
-    <p>Order</p>
-    <input type="text" name="order" id="">
-    <p>Delivery Address</p>
-    <input type="text" name="address" id="">
-    <p>L_G_A</p>
-    <input type="text" name="L_G_A" id="">
-    <p>Delivery Fee</p>
+    <form action="" method="post">
+        {% csrf_token %}
+        <p>Order</p>
+        <input type="text" name="order" value="{{ current_order }}" disabled="True" id="">
+        <p>Delivery Address</p>
+        <input type="text" name="address" value="{{ current_order.address }}" id="">
+        <!-- <p>L_G_A</p>
+        <input type="text" name="L_G_A" id=""> -->
+        <p>LGA</p>
+        <select name="L_G_A" class="select form-control" required id="id_L_G_A">
+            <option value="" selected>---------</option>
+          
+            <option value="1">Agege</option>
+          
+            <option value="2">Ikeja</option>
+          
+          </select>
+        <p>Delivery Fee</p>
+        <select name="delivery_fee" class="select form-control" required id="id_delivery_fee">
+            <option value="" selected>---------</option>
+          
+          </select>
+
+        <p><a href="{% url 'initiate-payment-4' current_order.id %}">Proceed to Payment</a></p>
+        
+    </form>
+    <script>
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    // Does this cookie string begin with the name we want?
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+        const csrftoken = getCookie('csrftoken');
+
+
+        let lga_field = document.getElementById("id_L_G_A")
+        let price_field = document.getElementById("id_delivery_fee")
+        lga_field.addEventListener("change", getLGAId)
+
+        function getLGAId(e){
+            console.log(e.target.value)
+            let lga_id = e.target.value 
+
+            const data = { id: lga_id };
+
+
+            let url = "{% url 'get-prices'  %}"
+
+        fetch(url, {
+        method: 'POST', // or 'PUT'
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': csrftoken,
+        },
+        body: JSON.stringify(data),
+        })
+        .then((response) => response.json())
+        .then((data) => {
+            console.log('Success:', data[0]);
+            price_field.innerHTML = '<option value="" selected>---------</option>'
+            for(let i = 0; i < data.length; i++){
+                price_field.innerHTML += `<option value=" ${data[i]['id']}" selected="">"${data[i]["price"]}"</option>`
+            }
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+
+        }
+    </script>
+
+    
     
 </body>
 </html>

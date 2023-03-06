@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .forms import PaymentForm, DeliveryForm
 from django.conf import settings
-from .models import Payment, Order_Payment
+from .models import Payment, Order_Payment, Delivery
 from django.contrib import messages
 from django.views import View
 from django.views.generic import CreateView
@@ -66,8 +66,11 @@ def initiate_payment_3(request, id):
 def initiate_payment_4(request, id):
     order = Order.objects.get(id=id)
     orderitem = OrderItem.objects.filter(order=order)
+    order_payment = Order_Payment.objects.get(order=order)
+    delivery = Delivery.objects.get(order=order_payment)
     if request.method == "POST":
         amount = order.get_total_cost()
+        new_amount = delivery.final_price_including_delivery
         email = order.email
 
         order_payment = Order_Payment.objects.create(order=order, amount=amount, email=email)
@@ -75,6 +78,7 @@ def initiate_payment_4(request, id):
             "order_payment": order_payment, 
             'order': order,
             "orderitem": orderitem,
+            "new_amount": new_amount,
             'paystack_public_key': 'pk_test_db7eb580c0015ee09205de7791906de5b11d108d'
         }
         return render(request, "core/make_payment4.html", context) # You changed it from make_payment to make_payment4
@@ -223,6 +227,7 @@ def delivery(request):
 
 def delivery2(request, id):
     current_order = Order.objects.get(id=id)
+    current_orderitem = OrderItem.objects.get(order=current_order)
     if request.method == "POST":
         address = current_order.address
         L_G_A = request.POST.get("L_G_A")
@@ -234,7 +239,7 @@ def delivery2(request, id):
             }
         return redirect(("order_details_delivery", context))
     else:
-        return render(request, "core/delivery2.html")    
+        return render(request, "core/delivery2.html", {"current_order": current_order})    
 
 
 
