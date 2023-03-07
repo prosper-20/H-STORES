@@ -63,14 +63,11 @@ def initiate_payment_3(request, id):
         return render(request, "core/initiate_payment_3.html", context)
     
 
-def initiate_payment_4(request, id):
-    order = Order.objects.get(id=id)
+def initiate_payment_4(request, pk):
+    order = Order.objects.get(id=pk)
     orderitem = OrderItem.objects.filter(order=order)
-    order_payment = Order_Payment.objects.get(order=order)
-    delivery = Delivery.objects.get(order=order_payment)
     if request.method == "POST":
         amount = order.get_total_cost()
-        new_amount = delivery.final_price_including_delivery
         email = order.email
 
         order_payment = Order_Payment.objects.create(order=order, amount=amount, email=email)
@@ -78,7 +75,6 @@ def initiate_payment_4(request, id):
             "order_payment": order_payment, 
             'order': order,
             "orderitem": orderitem,
-            "new_amount": new_amount,
             'paystack_public_key': 'pk_test_db7eb580c0015ee09205de7791906de5b11d108d'
         }
         return render(request, "core/make_payment4.html", context) # You changed it from make_payment to make_payment4
@@ -227,7 +223,7 @@ def delivery(request):
 
 def delivery2(request, id):
     current_order = Order.objects.get(id=id)
-    current_order_payment = Order_Payment.objects.get(order)
+    current_order_payment = Order_Payment.objects.get(current_order)
     current_orderitem = OrderItem.objects.get(order=current_order)
     if request.method == "POST":
         address = current_order.address
