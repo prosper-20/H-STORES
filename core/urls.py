@@ -1,11 +1,11 @@
 from django.urls import path
-from .views import initiate_payment_2, verify_payment, initiate_payment_3, verfiy_order_payment, initiate_payment_4, verify_payment2, delivery, getPrices, email_tester, delivery2
+from .views import initiate_payment_2, verify_payment, initiate_payment_3, verfiy_order_payment, initiate_payment_4, verify_payment2, delivery, getPrices, email_tester, delivery3
 
 
 urlpatterns = [
     path("prices/", getPrices, name="get-prices"),
     path("delivery/", delivery, name="delivery"),
-    path("orders/<int:id>/delivery", delivery2, name="order_details_delivery"),
+    path("orders/<int:id>/delivery", delivery3, name="order_details_delivery"),
     path("pay/", initiate_payment_2.as_view(), name="initiate-payment"), # you changed it from initiate_payment to initiate_pay,rnt)2
     path("<int:pk>/pay4/", initiate_payment_4, name="initiate-payment-4"), #This is the latest one ypu're susing"
     path("<str:ref>/", verify_payment2, name="verify-payment"), # You change this from verify_payment to verify_payment2

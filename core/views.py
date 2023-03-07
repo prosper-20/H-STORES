@@ -133,7 +133,7 @@ def verify_payment2(request, ref):
         my_dict = {"order_payment": order_payment,
                    "order_items": order_items}
         html_message = render_to_string(html_template, context=my_dict)
-        subject = "Order Confirmation"
+        subject = "Order Confirmation" 
         email_from = settings.EMAIL_HOST_USER
         # recipient_list = ["babatundemubaraq1650@gmail.com"]
         recipient_list = [post_mail]
@@ -221,22 +221,39 @@ def delivery(request):
 
 
 
-def delivery2(request, id):
+# def delivery2(request, id):
+#     order_id = Order.objects.get(id=id)
+#     current_order = Order_Payment.objects.get(order=order_id)
+#     if request.method == "POST":
+#         address = current_order.address
+#         L_G_A = request.POST.get("L_G_A")
+#         delivery_fee = request.POST.get("delivery_fee")
+#         current_order_delivery = Delivery.objects.create(order=current_order, address=address, L_G_A=L_G_A, delivery_fee=delivery_fee)
+#         context = {
+#             "current_order": current_order,
+#             "current_order_delivery": current_order_delivery
+#             }
+#         return redirect("initiate-payment-4", args=str["current_order"])
+#     else:
+#         return render(request, "core/delivery2.html", {"current_order": current_order})
+
+
+
+
+def delivery3(request, id):
     current_order = Order.objects.get(id=id)
-    current_order_payment = Order_Payment.objects.get(current_order)
-    current_orderitem = OrderItem.objects.get(order=current_order)
     if request.method == "POST":
         address = current_order.address
         L_G_A = request.POST.get("L_G_A")
+        print(L_G_A)
         delivery_fee = request.POST.get("delivery_fee")
         current_order_delivery = Delivery.objects.create(order=current_order, address=address, L_G_A=L_G_A, delivery_fee=delivery_fee)
-        context = {
-            "current_order": current_order,
-            "current_order_delivery": current_order_delivery
-            }
-        return redirect("initiate-payment-4", args=str["current_order"])
+        return redirect("initiate-payment-4", kwargs={"pk": current_order})
     else:
-        return render(request, "core/delivery2.html", {"current_order": current_order})    
+        return render(request, "core/delivery2.html", {"current_order": current_order})
+
+
+
 
 
 

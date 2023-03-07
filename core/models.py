@@ -103,7 +103,7 @@ class Delivery_Fee(models.Model):
 
 
 class Delivery(models.Model):
-    order = models.ForeignKey(Order_Payment, on_delete=models.CASCADE)
+    order = models.ForeignKey(Order, on_delete=models.CASCADE)
     address = models.TextField()
     L_G_A = models.ForeignKey(LGA, on_delete=models.CASCADE)
     delivery_fee = models.ForeignKey(Delivery_Fee, on_delete=models.CASCADE)
