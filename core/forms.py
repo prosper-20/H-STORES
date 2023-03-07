@@ -1,5 +1,11 @@
 from django import forms
-from .models import Payment, Delivery, Delivery_Fee
+from .models import Payment, Delivery, Delivery_Fee, Main_Delivery
+
+
+class MainDeliveryForm(forms.ModelForm):
+    class Meta:
+        model = Main_Delivery
+        fields = "__all__"
 
 
 class PaymentForm(forms.ModelForm):

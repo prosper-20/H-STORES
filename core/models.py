@@ -135,7 +135,7 @@ class Continent(models.Model):
     name = models.CharField(max_length=255)
 
 class Country(models.Model):
-    continent = models.ForeignKey(Continent)
+    continent = models.ForeignKey(Continent, on_delete=models.CASCADE)
     name = models.CharField(max_length=255)
 
 
@@ -144,7 +144,7 @@ class Country(models.Model):
 
 
 class Location(models.Model):
-    continent = models.ForeignKey(Continent)
+    continent = models.ForeignKey(Continent, on_delete=models.CASCADE)
     country = ChainedForeignKey(
         Country,
         chained_field="continent",
@@ -154,6 +154,27 @@ class Location(models.Model):
         sort=True)
     city = models.CharField(max_length=50)
     street = models.CharField(max_length=100)
+
+
+
+
+class Main_Delivery(models.Model):
+    order = models.ForeignKey(Order, on_delete=models.CASCADE)
+    address = models.CharField(max_length=200)
+    closest_stop = models.ForeignKey(LGA, on_delete=models.CASCADE)
+    price = ChainedForeignKey(
+        Delivery_Fee,
+        chained_field="closest_stop",
+        chained_model_field="lga",
+        show_all=False,
+        auto_choose=True,
+        sort=True
+
+    )
+
+    def __str__(self):
+        return str(self.order)
+
 
 
 

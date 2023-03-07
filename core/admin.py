@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Payment, Order_Payment, Delivery, LGA, Delivery_Fee
+from .models import Payment, Order_Payment, Delivery, LGA, Delivery_Fee, Continent, Country, Location, Main_Delivery
 from orders.models import Order, OrderItem
 import csv
 import datetime
@@ -11,7 +11,12 @@ admin.site.register(Payment)
 admin.site.register(Delivery)
 admin.site.register(LGA)
 admin.site.register(Delivery_Fee)
+admin.site.register(Main_Delivery)
 
+
+admin.site.register(Continent)
+admin.site.register(Country)
+admin.site.register(Location)
 
 
 class OrderItemInline(admin.TabularInline):

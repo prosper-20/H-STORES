@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .forms import PaymentForm, DeliveryForm
+from .forms import PaymentForm, DeliveryForm, MainDeliveryForm
 from django.conf import settings
 from .models import Payment, Order_Payment, Delivery
 from django.contrib import messages
@@ -218,6 +218,29 @@ def delivery(request):
         if form.is_valid():
             form.save()
     return render(request, "core/delivery.html", {"form": form})
+
+
+def delivery2(request):
+    form = MainDeliveryForm()
+    if request.method == "POST":
+        form = MainDeliveryForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Delivery info saved")
+            return redirect("/")
+    return render(request, "core/delivery3.html", {"form": form})
+
+
+
+class MainDeliveryCreateView(CreateView):
+    model = Main_Delivery
+    fields = ['title', 'content']
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+
+
 
 
 
