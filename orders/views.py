@@ -212,8 +212,8 @@ def order_summary(request, id):
     return render(request, "orders/order/order_summary.html", context)
 
 
-def order_details(request, pk):
-    current_order = Order.objects.get(id=pk)
+def order_details(request, id):
+    current_order = Order.objects.get(id=id)
     current_orderitem = OrderItem.objects.filter(order=current_order)
 
     context = {

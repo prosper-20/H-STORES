@@ -227,6 +227,7 @@ def delivery(request):
 
 def delivery2(request, id):
     current_order = Order.objects.get(id=id)
+    current_order_payment = Order_Payment.objects.get(order)
     current_orderitem = OrderItem.objects.get(order=current_order)
     if request.method == "POST":
         address = current_order.address
@@ -237,7 +238,7 @@ def delivery2(request, id):
             "current_order": current_order,
             "current_order_delivery": current_order_delivery
             }
-        return redirect(("order_details_delivery", context))
+        return redirect("initiate-payment-4", args=str["current_order"])
     else:
         return render(request, "core/delivery2.html", {"current_order": current_order})    
 
