@@ -52,7 +52,8 @@ INSTALLED_APPS = [
     'crispy_bootstrap5',
     'payment.apps.PaymentConfig',
     'coupons.apps.CouponsConfig',
-    'storages'
+    'storages',
+    'smart_selects'
 ]
 
 MIDDLEWARE = [
@@ -190,3 +191,5 @@ AWS_S3_REGION_NAME = 'us-east-2' #change to your region
 AWS_S3_SIGNATURE_VERSION = 's3v4'
 
 AWS_QUERYSTRING_AUTH= False
+
+JQUERY_URL = True

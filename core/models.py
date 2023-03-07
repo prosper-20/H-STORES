@@ -2,6 +2,7 @@ from django.db import models
 import secrets
 from .paystack import PayStack
 from orders.models import Order
+from smart_selects.db_fields import ChainedForeignKey
 
 
 class Order_Payment(models.Model):      # You just created this....
@@ -124,6 +125,35 @@ class Delivery(models.Model):
 # def order_payment(request, id):
 #     current_order = Order.objects.get(id=id)
 #     if current_order.paid == False:
+
+
+
+# TESTING THE SMART SELECT
+
+
+class Continent(models.Model):
+    name = models.CharField(max_length=255)
+
+class Country(models.Model):
+    continent = models.ForeignKey(Continent)
+    name = models.CharField(max_length=255)
+
+
+
+
+
+
+class Location(models.Model):
+    continent = models.ForeignKey(Continent)
+    country = ChainedForeignKey(
+        Country,
+        chained_field="continent",
+        chained_model_field="continent",
+        show_all=False,
+        auto_choose=True,
+        sort=True)
+    city = models.CharField(max_length=50)
+    street = models.CharField(max_length=100)
 
 
 
