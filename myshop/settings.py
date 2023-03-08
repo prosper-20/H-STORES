@@ -53,7 +53,8 @@ INSTALLED_APPS = [
     'payment.apps.PaymentConfig',
     'coupons.apps.CouponsConfig',
     'storages',
-    'smart_selects'
+    'smart_selects',
+    'newstore.apps.NewstoreConfig'
 ]
 
 MIDDLEWARE = [
