@@ -43,15 +43,32 @@ def product_detail(request, id, slug):
     reviews = Review.objects.filter(product=product)
     cart_product_form = CartAddProductForm()
     similar_products = Product.objects.filter(subcategory=product.subcategory).exclude(id=id, slug=slug) # This is to get similar products except the current one
-
-    
-
     return render(request,
                   'shop/product/detail.html',
                   {'product': product,
                    'cart_product_form': cart_product_form,
                    "reviews": reviews,
                    "similar_products": similar_products})
+
+def product_detail2(request, id, slug):
+    product = get_object_or_404(Product,
+                                id=id,
+                                slug=slug,
+                                available=True)
+    reviews = Review.objects.filter(product=product)
+    cart_product_form = CartAddProductForm()
+    similar_products = Product.objects.filter(subcategory=product.subcategory).exclude(id=id, slug=slug) # This is to get similar products except the current one
+    return render(request,
+                  'shop/store/product_detail.html',
+                  {'product': product,
+                   'cart_product_form': cart_product_form,
+                   "reviews": reviews,
+                   "similar_products": similar_products})
+
+
+    
+
+    
 
 
 
