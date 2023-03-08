@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .forms import PaymentForm, DeliveryForm, MainDeliveryForm
 from django.conf import settings
-from .models import Payment, Order_Payment, Delivery
+from .models import Payment, Order_Payment, Delivery, Main_Delivery
 from django.contrib import messages
 from django.views import View
 from django.views.generic import CreateView
@@ -231,13 +231,23 @@ def delivery2(request):
     return render(request, "core/delivery3.html", {"form": form})
 
 
+def delivery4(request, id):
+    if request.method == "POST":
+        address = request.POST.get("address")
+        closest_stop = request.POST.get("closest_stop")
+        price = request.POST.get("price")
+
+        Main_Delivery.objects.create(order=order, address=address, closest_stop=closest_stop, price=price)
+        return redirect("/")
+    return render(request, "core/delivery4.html", {"order": order})
 
 class MainDeliveryCreateView(CreateView):
     model = Main_Delivery
-    fields = ['title', 'content']
+    fields = ['address', 'closest_stop', 'price']
+    success_url = "/"
 
     def form_valid(self, form):
-        form.instance.author = self.request.user
+        form.instance.order = self.request.GET.get("id")
         return super().form_valid(form)
 
 

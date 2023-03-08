@@ -159,7 +159,7 @@ class Location(models.Model):
 
 
 class Main_Delivery(models.Model):
-    order = models.ForeignKey(Order, on_delete=models.CASCADE)
+    order = models.CharField(max_length=100)
     address = models.CharField(max_length=200)
     closest_stop = models.ForeignKey(LGA, on_delete=models.CASCADE)
     price = ChainedForeignKey(
