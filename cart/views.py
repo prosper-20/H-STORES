@@ -19,6 +19,21 @@ def cart_add(request, product_id):
     return redirect('cart:cart_detail')
 
 
+# You added this because of the new template
+@require_POST
+@require_POST
+def cart_add_2(request, product_id):
+    cart = Cart(request)
+    product = get_object_or_404(Product, id=product_id)
+    form = CartAddProductForm(request.POST)
+    if form.is_valid():
+        cd = form.cleaned_data
+        cart.add(product=product,
+                 quantity=cd['quantity'],
+                 override_quantity=cd['override'])
+    return redirect('cart:cart_detail_2')
+
+
 @require_POST
 def cart_remove(request, product_id):
     cart = Cart(request)
@@ -37,5 +52,20 @@ def cart_detail(request):
 
     return render(request,
                   'cart/detail.html',
+                  {'cart': cart,
+                   'coupon_apply_form': coupon_apply_form,})
+
+
+#You added this because of the new templste
+def cart_detail_2(request):
+    cart = Cart(request)
+    for item in cart:
+        item['update_quantity_form'] = CartAddProductForm(initial={
+                            'quantity': item['quantity'],
+                            'override': True})
+    coupon_apply_form = CouponApplyForm()
+
+    return render(request,
+                  'shop/store/order_summary.html',
                   {'cart': cart,
                    'coupon_apply_form': coupon_apply_form,})

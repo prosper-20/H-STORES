@@ -5,7 +5,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import CreateView
 
 
-def product_list(request, category_slug=None):
+def product_list2(request, category_slug=None):
     category = None
     categories = Category.objects.all()
     products = Product.objects.filter(available=True)
@@ -19,7 +19,7 @@ def product_list(request, category_slug=None):
                    'products': products})
 
 
-def product_list2(request, category_slug=None):
+def product_list(request, category_slug=None):
     category = None
     categories = Category.objects.all()
     products = Product.objects.filter(available=True)
@@ -35,7 +35,7 @@ def product_list2(request, category_slug=None):
                    'total': total})
 
 
-def product_detail(request, id, slug):
+def product_detail2(request, id, slug):
     product = get_object_or_404(Product,
                                 id=id,
                                 slug=slug,
@@ -50,7 +50,7 @@ def product_detail(request, id, slug):
                    "reviews": reviews,
                    "similar_products": similar_products})
 
-def product_detail2(request, id, slug):
+def product_detail(request, id, slug):
     product = get_object_or_404(Product,
                                 id=id,
                                 slug=slug,
