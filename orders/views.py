@@ -255,7 +255,7 @@ class OrderItemUpdateView(LoginRequiredMixin, UpdateView):
 
 class OrderSummaryUpdateView(LoginRequiredMixin, UpdateView):
     model = Order
-    fields = ['first_name', 'last_name', 'email', 'address',
+    fields = ['first_name', 'last_name', 'email', 'phone_number', 'address',
                   'postal_code', 'city']
     
     

@@ -17,6 +17,7 @@
     <h3>First Name: {{ current_order.first_name}}</h3>
     <h3>Last Name: {{ current_order.last_name}}</h3>
     <h3>Email Address: {{ current_order.email }} </h3>
+    <h3>Phone Number: {{ current_order.phone_number }} </h3>
 
     <h2>Cart Info</h2>
     <table>
@@ -35,7 +36,7 @@
       </table>
     <a class="btn btn-warning" href="{% url 'orders:order-summary-edit' current_order.pk %}">Edit</a>
     <br>
-    <a href="{% url 'order_details_delivery' current_order.pk %}">Proceed</a>
+    <a href="{% url 'initiate-payment-4' current_order.id %}">Proceed</a>
     <!-- <a href="{% url 'initiate-payment-4' current_order.id %}">Proceed to Payment</a> -->
 </body>
 </html>
