@@ -1,5 +1,10 @@
 from django.contrib import admin
-from .models import Category, Product, Review, SubCategory, SuperSubCategory
+from .models import Category, Product, Review, SubCategory, SuperSubCategory, Contact
+
+
+@admin.register(Contact)
+class ContactAdmin(admin.ModelAdmin):
+    list_display = ["name", "email", "subject"]
 
 
 @admin.register(Category)

@@ -30,6 +30,7 @@ class Order(models.Model):
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
     email = models.EmailField()
+    phone_number = models.CharField(max_length=11)
     address = models.CharField(max_length=250)
     postal_code = models.CharField(max_length=20)
     city = models.ForeignKey(LGA, on_delete=models.CASCADE)

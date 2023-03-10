@@ -1,8 +1,9 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from cart.forms import CartAddProductForm
-from .models import Category, Product, Review
+from .models import Category, Product, Review, Contact
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import CreateView
+from django.contrib import messages
 
 
 def product_list2(request, category_slug=None):
@@ -67,7 +68,17 @@ def product_detail(request, id, slug):
 
 
     
-
+def contact(request):
+    if request.method == "POST":
+        name = request.POST.get("name")
+        email = request.POST.get("email")
+        subject = request.POST.get("subject")
+        message = request.POST.get("message")
+        new = Contact.objects.create(name=name, email=email, subject=subject, message=message)
+        messages.success(request, "Message received. We will get back to you shortly")
+        return redirect("shop:contact")
+    else:
+        return render(request, "shop/contact.html")
     
 
 
