@@ -2,10 +2,13 @@ from django.contrib import admin
 import csv
 import datetime
 from django.http import HttpResponse
-from .models import Order, OrderItem, Refund
+from .models import Order, OrderItem, Refund, LGA, Delivery_prices
 from django.urls import reverse
 from django.utils.safestring import mark_safe
 
+
+admin.site.register(LGA)
+admin.site.register(Delivery_prices)
 
 class OrderItemInline(admin.TabularInline):
     model = OrderItem

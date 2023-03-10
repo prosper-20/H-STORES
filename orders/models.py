@@ -6,6 +6,25 @@ from decimal import Decimal
 from coupons.models import Coupon
 from django.core.validators import MinValueValidator, \
                                    MaxValueValidator
+from smart_selects.db_fields import ChainedForeignKey
+
+
+class LGA(models.Model):
+    city = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.city
+
+
+class Delivery_prices(models.Model):
+    city = models.ForeignKey(LGA, on_delete=models.CASCADE)
+    price = models.DecimalField(max_digits=10, decimal_places=2)
+
+    class Meta:
+        verbose_name_plural = "Delivery Prices"
+
+    def __str__(self):
+        return str(self.price)
 
 class Order(models.Model):
     first_name = models.CharField(max_length=50)
@@ -13,7 +32,12 @@ class Order(models.Model):
     email = models.EmailField()
     address = models.CharField(max_length=250)
     postal_code = models.CharField(max_length=20)
-    city = models.CharField(max_length=100)
+    city = models.ForeignKey(LGA, on_delete=models.CASCADE)
+    delivery_fee = ChainedForeignKey(Delivery_prices, chained_field="city",
+                                     chained_model_field="city",
+                                     show_all=False,
+                                    auto_choose=True,
+                                    sort=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     paid = models.BooleanField(default=False)
@@ -40,15 +64,23 @@ class Order(models.Model):
     
     def get_total_cost_before_discount(self):
         return sum(item.get_cost() for item in self.items.all())
+    
+    def get_delivery_fee(self):
+        a = self.delivery_fee
+        b = str(a)
+        c = float(b)
+        d = int(c)
+        return d
 
     def get_discount(self):
         total_cost = self.get_total_cost_before_discount()
         if self.discount:
             return total_cost * (self.discount / Decimal(100))
         return Decimal(0)
+    
 
     def get_total_cost(self):
-        total_cost = self.get_total_cost_before_discount()
+        total_cost = self.get_total_cost_before_discount() + self.get_delivery_fee()
         return total_cost - self.get_discount()
     
     def get_absolute_url(self):

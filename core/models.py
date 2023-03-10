@@ -102,6 +102,24 @@ class Delivery_Fee(models.Model):
         verbose_name_plural = "Delivery Fees"
 
 
+class Main_Delivery(models.Model):
+    order = models.CharField(max_length=100)
+    address = models.CharField(max_length=200)
+    closest_stop = models.ForeignKey(LGA, on_delete=models.CASCADE)
+    price = ChainedForeignKey(
+        Delivery_Fee,
+        chained_field="closest_stop",
+        chained_model_field="lga",
+        show_all=False,
+        auto_choose=True,
+        sort=True
+
+    )
+
+    def __str__(self):
+        return str(self.order)
+
+
 
 class Delivery(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE)
@@ -158,22 +176,7 @@ class Location(models.Model):
 
 
 
-class Main_Delivery(models.Model):
-    order = models.CharField(max_length=100)
-    address = models.CharField(max_length=200)
-    closest_stop = models.ForeignKey(LGA, on_delete=models.CASCADE)
-    price = ChainedForeignKey(
-        Delivery_Fee,
-        chained_field="closest_stop",
-        chained_model_field="lga",
-        show_all=False,
-        auto_choose=True,
-        sort=True
 
-    )
-
-    def __str__(self):
-        return str(self.order)
 
 
 
