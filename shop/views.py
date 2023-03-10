@@ -4,6 +4,8 @@ from .models import Category, Product, Review, Contact
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import CreateView
 from django.contrib import messages
+from django.views.generic import ListView
+from django.db.models import Q 
 
 
 def product_list2(request, category_slug=None):
@@ -65,6 +67,19 @@ def product_detail(request, id, slug):
                    'cart_product_form': cart_product_form,
                    "reviews": reviews,
                    "similar_products": similar_products})
+
+
+
+class SearchResultsView(ListView):
+    model = Product
+    template_name = 'shop/search_results.html'
+
+    def get_queryset(self):  # new
+        query = self.request.GET.get("q")
+        object_list = Product.objects.filter(
+            Q(name__icontains=query) | Q(slug__icontains=query)
+        )
+        return object_list
 
 
     

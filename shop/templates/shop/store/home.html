@@ -79,8 +79,9 @@
 </a>
   <div class="navbar-inner">
     <!-- <a class="brand" href="index.html"><img src="{% static 'shop/new/themes/images/logo.png' %}" alt="Bootsshop"/></a> -->
-		<form class="form-inline navbar-search" method="post" action="products.html" >
-		<input id="srchFld" class="srchTxt" type="text" />
+		<form  class="form-inline navbar-search" method="get" action="{% url 'shop:search_results' %}" >
+			{% csrf_token %}
+		<input name="q" class="srchTxt" type="text" />
 		  <!-- <select class="srchTxt">
 			<option>All</option>
 			<option>CLOTHES </option>
@@ -92,12 +93,14 @@
 		  <button type="submit" id="submitButton" class="btn btn-primary">Go</button>
     </form>
     <ul id="topMenu" class="nav pull-right">
-	 <li class=""><a href="special_offer.html">Specials Offer</a></li>
-	 <li class=""><a href="normal.html">Delivery</a></li>
-	 <li class=""><a href="contact.html">Contact</a></li>
+	 
+	 <!-- <li class=""><a href="normal.html">Delivery</a></li> -->
+	 <li class=""><a href="{% url 'shop:contact' %}">Contact</a></li>
+	 <li><a href="{% url 'orders:order-history' %}">Orders</a></li>
 	 <li class="">
 		{% if user.is_authenticated %}
-	 <a href="{% url 'logout' %}" role="button" data-toggle="modal" style="padding-right:0"><span class="btn btn-md btn-primary">Logout</span></a>
+		<a href="{% url 'logout' %}" role="button" data-toggle="modal" style="padding-right:0"><span class="btn btn-md btn-primary">Logout</span></a>
+	
 	 {% else %}
 	 <a href="{% url 'login' %}" role="button" data-toggle="modal" style="padding-right:0"><span class="btn btn-md btn-primary">Login</span></a>
 	 {% endif %}

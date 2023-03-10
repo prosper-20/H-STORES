@@ -54,7 +54,8 @@ INSTALLED_APPS = [
     'coupons.apps.CouponsConfig',
     'storages',
     'smart_selects',
-    'newstore.apps.NewstoreConfig'
+    'newstore.apps.NewstoreConfig',
+    'ckeditor',
 ]
 
 MIDDLEWARE = [
