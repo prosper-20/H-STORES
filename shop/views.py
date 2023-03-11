@@ -26,7 +26,7 @@ def product_list(request, category_slug=None):
     category = None
     categories = Category.objects.all()
     products = Product.objects.filter(available=True)
-    
+
     total = len(products)
     if category_slug:
         category = get_object_or_404(Category, slug=category_slug)
@@ -55,6 +55,7 @@ def product_detail2(request, id, slug):
                    "similar_products": similar_products})
 
 def product_detail(request, id, slug):
+    categories = Category.objects.all()
     product = get_object_or_404(Product,
                                 id=id,
                                 slug=slug,
@@ -67,6 +68,7 @@ def product_detail(request, id, slug):
                   {'product': product,
                    'cart_product_form': cart_product_form,
                    "reviews": reviews,
+                   "categories": categories,
                    "similar_products": similar_products})
 
 

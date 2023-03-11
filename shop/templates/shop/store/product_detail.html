@@ -169,7 +169,7 @@
 			</ul> -->
 		</li>
 		{% endfor %}
-		<li class="subMenu"><a> CLOTHES [840] </a>
+		<!-- <li class="subMenu"><a> CLOTHES [840] </a> -->
 		<!-- <ul style="display:none">
 			<li><a href="products.html"><i class="icon-chevron-right"></i>Women's Clothing (45)</a></li>
 			<li><a href="products.html"><i class="icon-chevron-right"></i>Women's Shoes (8)</a></li>												
@@ -202,7 +202,7 @@
 		<img src="{{ product.image.url }}" alt="Bootshop panasonoc New camera"/>
 		<div class="caption">
 		  <h5>{{ product }}</h5>
-			<h4 style="text-align:center"><a class="btn" href="{{ product.get_absolute_url }}"> <i class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">$222.00</a></h4>
+			<h4 style="text-align:center"><a class="btn" href="{{ product.get_absolute_url }}"> <i class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="{{ product.get_absolute_url }}"><span>&#8358;</span>{{ product.price}}</a></h4>
 		</div>
 	  </div><br/>
 	  {% endfor %}
@@ -302,7 +302,7 @@
 				{{ product.description }}
 				
 				</p>
-				<a class="btn btn-small pull-right" href="#detail">More Details</a>
+				<a class="btn btn-primary btn-md pull-right" href="#detail">More Details</a>
 				<br class="clr"/>
 			<a href="#" name="detail"></a>
 			<hr class="soft"/>
@@ -310,8 +310,8 @@
 			
 			<div class="span9">
             <ul id="productDetail" class="nav nav-tabs">
-              <li class="active"><a href="#home" data-toggle="tab">Product Details</a></li>
-              <li><a href="#profile" data-toggle="tab">Related Products</a></li>
+              <li class="active"><a href="" data-toggle="tab">Product Details</a></li>
+              
             </ul>
             <div id="myTabContent" class="tab-content">
               <div class="tab-pane fade active in" id="home">
@@ -339,6 +339,23 @@
 					{% else %}
 					<h5>None</h5>
 					{% endif %}
+
+				<h4>Reviews</h4>
+				{% if reviews %}
+					{% for review in reviews %}
+					{{ review.body }} - {{ review.user}}
+					{% endfor %}
+					<p><a href="{% url 'shop:add-review' product.id product.category %}">Add Review</a></p>
+				{% else %}
+					<p>No reviews yet!</p>
+					<a href="{% url 'shop:add-review' product.id product.category %}">Add Review</a>
+				{% endif %}
+				<div>
+				<!-- <h4>Similar Products</h4>
+				{% for product in similar_products %}
+					<img src="{{ product.image.url }}" width="400" height="300" alt="">
+					<a href="{{ product.get_absolute_url }}">{{ product }}</a>
+				{% endfor %} -->
               </div>
 		<div class="tab-pane fade" id="profile">
 		<div id="myTab" class="pull-right">
