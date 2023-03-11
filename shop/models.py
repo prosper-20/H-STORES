@@ -59,6 +59,16 @@ class Category(models.Model):
                        args=[self.slug])
 
 
+class MyProductImages(models.Model):
+    image = models.ImageField(upload_to="product_images")
+
+    class Meta:
+        verbose_name_plural = "Product Images"
+
+    def __str__(self):
+        return str(self.image)
+
+
 class Product(models.Model):
     category = models.ForeignKey(Category,
                                  related_name='products',
@@ -69,6 +79,7 @@ class Product(models.Model):
     slug = models.SlugField(max_length=200)
     image = models.ImageField(upload_to='products/%Y/%m/%d',
                               blank=True)
+    other_images = models.ManyToManyField(MyProductImages)
     description = models.TextField(blank=True)
     specifications = RichTextField(blank=True, null=True)
     price = models.DecimalField(max_digits=10,
@@ -91,6 +102,10 @@ class Product(models.Model):
     def get_absolute_url(self):
         return reverse('shop:product_detail',   # You changed this from shop:product_detail to shop:product_detail_2
                        args=[self.id, self.slug])
+    
+
+
+
 
 
 

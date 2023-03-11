@@ -234,11 +234,14 @@
             </a>
 			<div id="differentview" class="moreOptopm carousel slide">
                 <div class="carousel-inner">
-                  <div class="item active">
-                   <a href="themes/images/products/large/f1.jpg"> <img style="width:29%" src="{% static 'shop/new/themes/images/products/large/f1.jpg' %}" alt=""/></a>
-                   <a href="themes/images/products/large/f2.jpg"> <img style="width:29%" src="{% static 'shop/new/themes/images/products/large/f2.jpg' %}" alt=""/></a>
-                   <a href="themes/images/products/large/f3.jpg" > <img style="width:29%" src="{% static 'shop/new/themes/images/products/large/f3.jpg' %}" alt=""/></a>
-                  </div>
+					
+					<div class="item active">
+						{% for image in product.other_images.all %}
+					<a href="{{ image.image.url }}"><img style="width:29%" src="{{ image.image.url }}" alt=""/></a>
+					{% endfor %}
+					<!-- <a href="themes/images/products/large/f2.jpg"> <img style="width:29%" src="{% static 'shop/new/themes/images/products/large/f2.jpg' %}" alt=""/></a>
+					<a href="themes/images/products/large/f3.jpg" > <img style="width:29%" src="{% static 'shop/new/themes/images/products/large/f3.jpg' %}" alt=""/></a> -->
+					</div>
                   <div class="item">
                    <a href="themes/images/products/large/f3.jpg" > <img style="width:29%" src="{% static 'shop/new/themes/images/products/large/f3.jpg' %}" alt=""/></a>
                    <a href="themes/images/products/large/f1.jpg"> <img style="width:29%" src="{% static 'shop/new/themes/images/products/large/f1.jpg' %}" alt=""/></a>
@@ -250,6 +253,7 @@
               <a class="right carousel-control" href="#myCarousel" data-slide="next">›</a> 
 			  -->
               </div>
+			  
 			  
 			 <div class="btn-toolbar">
 			  <div class="btn-group">
