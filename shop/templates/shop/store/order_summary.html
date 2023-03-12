@@ -92,9 +92,7 @@
 		  <button type="submit" id="submitButton" class="btn btn-primary">Go</button>
     </form>
     <ul id="topMenu" class="nav pull-right">
-	 <li class=""><a href="special_offer.html">Specials Offer</a></li>
-	 <li class=""><a href="normal.html">Delivery</a></li>
-	 <li class=""><a href="contact.html">Contact</a></li>
+	 <li class=""><a href="{% url 'shop:contact' %}">Contact</a></li>
 	 <li class="">
         {% if user.is_authenticated %}
         <a href="{% url 'logout' %}" role="button" data-toggle="modal" style="padding-right:0"><span class="btn btn-md btn-primary">Logout</span></a>
@@ -260,7 +258,7 @@
                     <form action="{% url "cart:cart_add" product.id %}" method="post">
                         {{ item.update_quantity_form.quantity }}
                         {{ item.update_quantity_form.override }}
-                        <input type="submit" value="Update">
+                        <input type="submit" class="btn btn-outline-primary" value="Update">
                         {% csrf_token %}
                       </form>
 				  </td>
@@ -269,7 +267,7 @@
                     <input class="btn btn-danger" type="submit" value="Remove">
                     {% csrf_token %}
                   </form></td>
-                  <td>$25.00</td>
+                  <td>0.00</td>
                   <td>{{ item.total_price }}</td>
                 </tr>
                 {% endwith %}
@@ -306,8 +304,12 @@
                   <td> $50.00</td>
                 </tr> -->
                  <tr>
-                  <td colspan="6" style="text-align:right">Delivery Fee:	</td>
-                  <td>------</td>
+                  <td colspan="6" style="text-align:right">Discount:	</td>
+				  {% if cart.get_discount %}
+                  	<td>{{ get_discount }}</td>
+					{% else %}
+					<td>-----</td>
+				{% endif %}
                 </tr>
 				 <tr>
                   <td colspan="6" style="text-align:right"><strong>TOTAL</strong></td>
@@ -321,7 +323,7 @@
 			<tbody>
 				 <tr>
                   <td> 
-				<form class="form-horizontal">
+				<form class="form-horizontal" >
 				<div class="control-group">
 				<label class="control-label"><strong> VOUCHERS CODE: </strong> </label>
 				<div class="controls">
@@ -336,7 +338,7 @@
 			</tbody>
 			</table>
 			
-			<table class="table table-bordered">
+			<!-- <table class="table table-bordered">
 			 <tr><th>ESTIMATE YOUR SHIPPING </th></tr>
 			 <tr> 
 			 <td>
@@ -361,8 +363,8 @@
 				</form>				  
 			  </td>
 			  </tr>
-            </table>		
-	<a href="{% url 'shop:product_list' %}" class="btn btn-primary btn-md"><i class="icon-arrow-left"></i> Continue Shopping </a>
+            </table>		 -->
+	<a href="{% url 'shop:product_list' %}" class="btn btn-secondary btn-md"><i class="icon-arrow-left"></i> Continue Shopping </a>
 	<a href="{% url "orders:order_create" %}" class="btn btn-primary btn-large pull-right">Next <i class="icon-arrow-right"></i></a>
 	
 </div>

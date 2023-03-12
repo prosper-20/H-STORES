@@ -202,7 +202,7 @@
 		<img src="{{ product.image.url }}" alt="Bootshop panasonoc New camera"/>
 		<div class="caption">
 		  <h5>{{ product }}</h5>
-			<h4 style="text-align:center"><a class="btn" href="{{ product.get_absolute_url }}"> <i class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="{{ product.get_absolute_url }}"><span>&#8358;</span>{{ product.price}}</a></h4>
+			<h4 style="text-align:center"><a class="btn" href="{{ product.get_absolute_url }}"> <i class="icon-zoom-in"></i></a> <a class="btn" href="{{ product.get_absolute_url }}">View <i class="fa fa-eye"></i></a> <a class="btn btn-primary" href="{{ product.get_absolute_url }}"><span>&#8358;</span>{{ product.price}}</a></h4>
 		</div>
 	  </div><br/>
 	  {% endfor %}
@@ -223,8 +223,8 @@
 <!-- Sidebar end=============================================== -->
 	<div class="span9">
     <ul class="breadcrumb">
-    <li><a href="index.html">Home</a> <span class="divider">/</span></li>
-    <li><a href="products.html">Products</a> <span class="divider">/</span></li>
+    <li><a href="{% url 'shop:product_list' %}">Home</a> <span class="divider">/</span></li>
+    <li><a href="{% url 'shop:product_list' %}">Products</a> <span class="divider">/</span></li>
     <li class="active">product Details</li>
     </ul>	
 	<div class="row">	  
@@ -327,11 +327,11 @@
 				</tbody>
 				</table>
 				
-				<h5>Features</h5>
+				<!-- <h5>Features</h5>
 				<p>
 				14 Megapixels. 18.0 x Optical Zoom. 3.0-inch LCD Screen. Full HD photos and 1280 x 720p HD movie capture. ISO sensitivity ISO6400 at reduced resolution. Tracking Auto Focus. Motion Panorama Mode. Face Detection technology with Blink detection and Smile and shoot mode. 4 x AA batteries not included. WxDxH 110.2 ×81.4x73.4mm. Weight 0.341kg (excluding battery and memory card). Weight 0.437kg (including battery and memory card).<br/>
 				OND363338
-				</p>
+				</p> -->
 
 				<h4>Product Specifications</h4>
 					{% if product.specifications %}
