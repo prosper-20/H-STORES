@@ -41,6 +41,10 @@
       <td><a href="mailto:{{ order.email }}">{{ order_payment.email }}</a></td>
     </tr>
     <tr>
+      <th>Phone number</th>
+      <td><a href="mailto:{{ order.email }}">{{ order_payment.order.phone_number }}</a></td>
+    </tr>
+    <tr>
       <th>Address</th>
     <td>
       {{ order_payment.order.address }},
@@ -90,6 +94,10 @@
           <td class="num"><span>&#8358;</span>{{ item.get_cost }}</td>
         </tr>
       {% endfor %}
+      <tr class="total">
+        <td colspan="3">Delivery Fee</td>
+        <td class="num"><span>&#8358;</span>{{ order_payment.order.delivery_fee }}</td>
+      </tr>
       <tr class="total">
         <td colspan="3">Total</td>
         <td class="num"><span>&#8358;</span>{{ order_payment.order.get_total_cost }}</td>
