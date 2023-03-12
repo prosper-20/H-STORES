@@ -106,6 +106,7 @@ class ReviewCreateView(LoginRequiredMixin, CreateView): # This is for adding a r
     template_name = "shop/product/reviews.html"
     fields = ['body']
     success_url = "/"
+    
 
     def form_valid(self, form):
         form.instance.product_id = self.kwargs['id']
