@@ -1,3 +1,97 @@
+.module {
+  border: none;
+  margin-bottom: 30px;
+  background: var(--body-bg);
+}
+
+.module p, .module ul, .module h3, .module h4, .module dl, .module pre {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.module blockquote {
+  margin-left: 12px;
+}
+
+.module ul, .module ol {
+  margin-left: 1.5em;
+}
+
+.module h3 {
+  margin-top: .6em;
+}
+
+.module h2, .module caption, .inline-group h2 {
+  margin: 0;
+  padding: 8px;
+  font-weight: 400;
+  font-size: 0.8125rem;
+  text-align: left;
+  background-color: #5f788a;
+  color: var(--header-link-color);
+}
+
+.module caption,
+.inline-group h2 {
+  font-size: 0.75rem;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.module table {
+  border-collapse: collapse;
+}
+
+
+.object-tools {
+  font-size: 0.625rem;
+  font-weight: bold;
+  padding-left: 0;
+  float: right;
+  position: relative;
+  margin-top: -48px;
+}
+
+.object-tools li {
+  display: block;
+  float: left;
+  margin-left: 5px;
+  height: 1rem;
+}
+
+.object-tools a {
+  border-radius: 15px;
+
+}
+
+.object-tools a:link, .object-tools a:visited {
+  display: block;
+  float: left;
+  padding: 3px 12px;
+  background: var(--object-tools-bg);
+  color: var(--object-tools-fg);
+  font-weight: 400;
+  font-size: 0.6875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.object-tools a:focus, .object-tools a:hover {
+  background-color: var(--object-tools-hover-bg);
+}
+
+.object-tools a:focus{
+  text-decoration: none;
+}
+
+.object-tools a.viewsitelink, .object-tools a.addlink {
+  background-repeat: no-repeat;
+  background-position: right 7px center;
+  padding-right: 26px;
+}
+
+
+
 body {
     background: #fafafa;
     color: #333333;

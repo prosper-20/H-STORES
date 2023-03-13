@@ -151,7 +151,7 @@ class RequestRefundView(View):
                 return redirect("shop:product_list")
 
             except ObjectDoesNotExist:
-                messages.info(self.request, "This order does not exist.")
+                messages.info(self.request, "This order does not exist, Kindly check the order details")
                 return redirect("orders:request-refund")
 
 
@@ -172,7 +172,7 @@ def history(request):
 def user_order_detail(request, order_id):
     order_payment = get_object_or_404(Order_Payment, id=order_id) # You changed this from get_object_or_404(Order, id=order_id) to what you have
     return render(request,
-                  'admin/orders/order/user_detail.html',
+                  'admin/orders/order/user_detail2.html', # You changed this from user_detail.html to user_detail2.html
                   {'order_payment': order_payment})
 
 @login_required

@@ -1,0 +1,123 @@
+{% extends "users/user_base.html" %}
+{% load static %}
+{% block content %}
+
+<table class="table table-striped">
+    <ul class="object-tools">
+        <li>
+          <a href="#" onclick="window.print();">
+            Print order
+          </a>
+          <a href="{% url 'orders:request-refund' %}">
+            Request Refund
+          </a>
+        </li>
+      </ul>
+    <thead>
+      <tr>
+        <th scope="col">Order Details</th>
+        <th scope="col" style="float: right;">
+            <a class="btn btn-primary" href="#" onclick="window.print();">
+              Print order
+            </a>
+            <a class="btn btn-primary" href="{% url 'orders:request-refund' %}">
+              Request Refund
+            </a>
+        </th>
+        <!-- <th scope="col">Created</th>
+        <th scope="col">First Name</th>
+        <th scope="col">Last Name</th>
+        <th scope="col">Email</th>
+        <th scope="col">Phone Number</th>
+        <th scope="col">Address</th>
+        <th scope="col">Postal Code</th>
+      </tr> -->
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">Created</th>
+        <td>{{ order_payment.date_created }}</td>
+        
+      </tr>
+      <tr>
+        <th scope="row">First name</th>
+        <td>{{ order_payment.order.first_name }}</td>
+      </tr>
+      <tr>
+        <th scope="row">Last name</th>
+        <td>{{ order_payment.order.last_name }}</td>
+      </tr>
+      <tr>
+        <th scope="row">Email</th>
+        <td><a href="mailto:{{ order_payment.email }}">{{ order_payment.email }}</a></td>
+      </tr>
+      <tr>
+        <th scope="row">Phone number</th>
+        <td>{{ order_payment.order.phone_number }}</td>
+      </tr>
+      <tr>
+        <th scope="row">Address</th>
+        <td>{{ order_payment.order.address }}</td>
+        <!-- <td>the Bird</td>
+        <td>@twitter</td> -->
+      </tr>
+      <tr>
+        <th scope="row">Postal code</th>
+        <td>{{ order_payment.order.postal_code }}</td>
+      </tr>
+      <tr>
+        <th scope="row">City</th>
+        <td>{{ order_payment.order.city }}</td>
+      </tr>
+      <tr>
+        <th scope="row">Total amount</th>
+        <td><span>&#8358;</span>{{ order_payment.order.get_total_cost }}</td>
+      </tr>
+      <tr>
+        <th scope="row">Status</th>
+        <td>{% if order_payment.verified %}Paid{% else %}Pending payment{% endif %}</td>
+      </tr>
+      <tr>
+        <th scope="row">Paystack payment</th>
+        <td>
+          {% if order_payment.ref %}
+            <a href="{{ order_payment.ref }}" target="_blank">
+              {{ order_payment.ref }}
+            </a>
+          {% endif %}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="module">
+  <h2>Items bought</h2>
+  <table style="width:100%">
+    <thead>
+      <tr>
+        <th>Product</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for item in order_payment.order.items.all %}
+        <tr class="row{% cycle "1" "2" %}">
+          <td>{{ item.product.name }}</td>
+          <td class="num"><span>&#8358;</span>{{ item.price }}</td>
+          <td class="num">{{ item.quantity }}</td>
+          <td class="num"><span>&#8358;</span>{{ item.get_cost }}</td>
+        </tr>
+      {% endfor %}
+      <tr class="total">
+        <strong><td colspan="3">Delivery Fee</td></strong>
+        <td class="num"><span>&#8358;</span>{{ order_payment.order.delivery_fee }}</td>
+      </tr>
+      <tr class="total">
+        <strong><td colspan="3">Total</td></strong>
+        <td class="num"><span>&#8358;</span>{{ order_payment.order.get_total_cost }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+{% endblock content %}
