@@ -17,3 +17,5 @@ urlpatterns = [
     path("orders/history/", views.order_history, name="order-history"),
     path("pay-later/", views.pay_later, name="pay-later")
 ]
+
+

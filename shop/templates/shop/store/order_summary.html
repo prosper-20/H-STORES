@@ -258,7 +258,7 @@
                     <form action="{% url "cart:cart_add" product.id %}" method="post">
                         {{ item.update_quantity_form.quantity }}
                         {{ item.update_quantity_form.override }}
-                        <input type="submit" class="btn btn-outline-primary" value="Update">
+                        <input type="submit" class="btn btn-primary" value="Update">
                         {% csrf_token %}
                       </form>
 				  </td>

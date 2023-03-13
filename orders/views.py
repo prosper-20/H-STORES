@@ -98,8 +98,7 @@ def order_create_2(request):
 @staff_member_required
 def admin_order_detail(request, order_id):
     # order_payment = get_object_or_404(Order_Payment, id=order_id) # You changed this from get_object_or_404(Order, id=order_id) to what you have
-    order_payment = Order_Payment.objects.get(order=order_id)
-    print(order_id)
+    order_payment = Order_Payment.objects.get(id=order_id)
     return render(request,
                   'admin/orders/order/detail.html',
                   {'order_payment': order_payment})
