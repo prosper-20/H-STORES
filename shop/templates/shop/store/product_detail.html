@@ -349,10 +349,10 @@
 					<br>
 					{% endfor %}
 					
-					<p><a href="{% url 'shop:add-review' product.id product.category %}">Add Review</a></p>
+					<p><a href="{% url 'shop:add-review' product.id product.slug %}">Add Review</a></p>
 				{% else %}
 					<p>No reviews yet!</p>
-					<a class="btn btn-primary btn-sm" href="{% url 'shop:add-review' product.id product.category %}">Add Review</a>
+					<a class="btn btn-primary btn-sm" href="{% url 'shop:add-review' product.id product.slug %}">Add Review</a>
 				{% endif %}
 				<div>
 				<!-- <h4>Similar Products</h4>

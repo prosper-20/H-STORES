@@ -296,17 +296,17 @@
                 </tr> -->
 				
                 <tr>
-                  <td colspan="6" style="text-align:right">Total Price:	</td>
-                  <td> $228.00</td>
+                  <td colspan="6" style="text-align:right"><strong>Total Price:	</td></strong>
+                  <td>{{ cart.get_total_price }}</td>
                 </tr>
 				 <!-- <tr>
                   <td colspan="6" style="text-align:right">Total Discount:	</td>
                   <td> $50.00</td>
                 </tr> -->
                  <tr>
-                  <td colspan="6" style="text-align:right">Discount:	</td>
+                  <td colspan="6" style="text-align:right"><strong>Discount:	</td></strong>
 				  {% if cart.get_discount %}
-                  	<td>{{ get_discount }}</td>
+                  	<td>{{ cart.get_discount }}</td>
 					{% else %}
 					<td>-----</td>
 				{% endif %}
@@ -323,12 +323,13 @@
 			<tbody>
 				 <tr>
                   <td> 
-				<form class="form-horizontal" >
+				<form class="form-horizontal" action="{% url "coupons:apply" %}" method="post">
+					
 				<div class="control-group">
 				<label class="control-label"><strong> VOUCHERS CODE: </strong> </label>
 				<div class="controls">
 				<input type="text" class="input-medium" placeholder="CODE">
-				<button type="submit" class="btn"> ADD </button>
+				<button type="submit" class="btn"> APPLY </button>
 				</div>
 				</div>
 				</form>
@@ -336,6 +337,25 @@
                 </tr>
 				
 			</tbody>
+
+			
+			<table class="table table-bordered">
+				<tbody>
+					 <tr>
+					  <td> 
+						<form class="form-horizontal" action="{% url "coupons:apply" %}" method="post">
+							<div class="control-group">
+							{{ coupon_apply_form }}
+							<div class="controls">
+							<input type="submit" value="Apply">
+							</div>
+						</div>
+							{% csrf_token %}
+						  </form>
+					</td>
+					</tr>
+					
+				</tbody>
 			</table>
 			
 			<!-- <table class="table table-bordered">
