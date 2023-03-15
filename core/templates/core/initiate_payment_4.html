@@ -1,10 +1,11 @@
 {% extends "core/base.html" %}
 {% load crispy_forms_tags %}
 {% block content %}
+
 <div class="container">
     <div class="d-flex row justify-content center align-items-center py-md-5 py-3" style="min-height: 90vh;">
     <div class="col-12">
-        <h1>Hi {{ order.first_name }}, you are to pay {{ order.get_total_cost }}</h1>
+        <h4>Hi {{ order.first_name }}, you are to pay {{ order.get_total_cost }}</h4>
         <form action="" method="post" id="paymentForm">
             {% csrf_token %}
             <p>Order Details</p>

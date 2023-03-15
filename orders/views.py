@@ -219,7 +219,8 @@ def order_details(request, id):
 
     context = {
         "current_order": current_order,
-        "current_orderitem": current_orderitem
+        "current_orderitem": current_orderitem,
+        "title": "Order | Details"
     }
     return render(request, "orders/order/order_details.html", context)
 
