@@ -346,8 +346,9 @@
 					{% for review in reviews %}
 					<strong>{{ review.body }}</strong> by {{ review.user.username }}
 					{{ review.date_added }} 
-					{% endfor %}
 					<br>
+					{% endfor %}
+					
 					<p><a href="{% url 'shop:add-review' product.id product.category %}">Add Review</a></p>
 				{% else %}
 					<p>No reviews yet!</p>

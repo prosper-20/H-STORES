@@ -124,7 +124,8 @@ class RequestRefundView(View):
         form = RefundForm()
         context = {
             'form': form,
-            'title': 'Profile'
+            'title': 'Request Refund'
+
         }
         return render(self.request, "orders/order/request_refund.html", context)
 
