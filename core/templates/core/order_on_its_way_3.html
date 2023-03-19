@@ -110,33 +110,35 @@ For what reason would it be advisable for me to think about business content? Th
                                         Order Confirmation #
                                     </td>
                                     <td width="25%" align="left" bgcolor="#eeeeee" style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 800; line-height: 24px; padding: 10px;">
-                                        2345678
+                                        {{ order_payment.order.ref|truncatechars:6}}
                                     </td>
                                 </tr>
+                                {% for item in order_items %}
                                 <tr>
                                     <td width="75%" align="left" style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 400; line-height: 24px; padding: 15px 10px 5px 10px;">
-                                        Purchased Item (1)
+                                        <strong>{{item.product}}</strong> x {{ item.quantity }}
                                     </td>
                                     <td width="25%" align="left" style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 400; line-height: 24px; padding: 15px 10px 5px 10px;">
-                                        $100.00
+                                        <span>&#8358;</span>{{ item.get_cost }}
                                     </td>
                                 </tr>
+                                {% endfor %}
                                 <tr>
                                     <td width="75%" align="left" style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 400; line-height: 24px; padding: 5px 10px;">
-                                        Shipping + Handling
+                                        Delivery Fee
                                     </td>
                                     <td width="25%" align="left" style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 400; line-height: 24px; padding: 5px 10px;">
-                                        $10.00
+                                        <span>&#8358;</span>{{ order_payment.order.delivery_fee }}
                                     </td>
-                                </tr>
-                                <tr>
+                                </tr> 
+                                <!-- <tr>
                                     <td width="75%" align="left" style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 400; line-height: 24px; padding: 5px 10px;">
                                         Sales Tax
                                     </td>
                                     <td width="25%" align="left" style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 400; line-height: 24px; padding: 5px 10px;">
                                         $5.00
                                     </td>
-                                </tr>
+                                </tr> -->
                             </table>
                         </td>
                     </tr>

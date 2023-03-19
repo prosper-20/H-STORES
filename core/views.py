@@ -129,7 +129,7 @@ def verify_payment2(request, ref):
     if verified:
         messages.success(request, f"You have successfuly paid for your order")
         #  You just added this for the email sending
-        html_template = 'core/order_on_its_way_2.html'
+        html_template = 'core/order_on_its_way_3.html'
         my_dict = {"order_payment": order_payment,
                    "order_items": order_items}
         html_message = render_to_string(html_template, context=my_dict)
