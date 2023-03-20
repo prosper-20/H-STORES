@@ -98,7 +98,7 @@ def login2(request):
 
         if user is not None:
             auth.login(request, user)
-            messages.success(request, f"You are logged in as { user.username }")
+            messages.info(request, f"You are logged in as { user.username }")
             return redirect("/")
         else:
             messages.info(request, 'Credentials Invalid')

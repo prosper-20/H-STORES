@@ -134,7 +134,7 @@
 	<div class="row">
 <!-- Sidebar ================================================== -->
 	<div id="sidebar" class="span3">
-		<div class="well well-small"><a id="myCart" href="product_summary.html"><img src="{% static 'shop/new/themes/images/ico-cart.png' %}" alt="cart">{{ cart|length}} Items in your cart</a></div>
+		<div class="well well-small"><a id="myCart" href="product_summary.html"><img src="{% static 'shop/new/themes/images/ico-cart.png' %}" alt="cart">{{ cart|length}} Item(s) in your cart</a></div>
 		<ul id="sideManu" class="nav nav-tabs nav-stacked">
 			{% for c in categories %}
 			<li {% if category.slug == c.slug %} class="subMenu open" {% endif %}><a>{{ c.name }}</a>
@@ -337,9 +337,10 @@
                 </tr>
 				
 			</tbody>
+			</table>
 
 			
-			<table class="table table-bordered">
+			<!-- <table class="table table-bordered">
 				<tbody>
 					 <tr>
 					  <td> 
@@ -356,7 +357,7 @@
 					</tr>
 					
 				</tbody>
-			</table>
+			</table> -->
 			
 			<!-- <table class="table table-bordered">
 			 <tr><th>ESTIMATE YOUR SHIPPING </th></tr>
@@ -424,9 +425,10 @@
 				<a href="#"><img width="60" height="60" src="{% static 'shop/new/themes/images/facebook.png' %}" title="facebook" alt="facebook"/></a>
 				<a href="#"><img width="60" height="60" src="{% static 'shop/new/themes/images/twitter.png' %}" title="twitter" alt="twitter"/></a>
 				<a href="#"><img width="60" height="60" src="{% static 'shop/new/themes/images/youtube.png' %}" title="youtube" alt="youtube"/></a>
+				<a href="#"><img width="60" height="60" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Instagram_logo_2022.svg/1200px-Instagram_logo_2022.svg.png" title="youtube" alt="youtube"/></a>
 			 </div> 
 		 </div>
-		<p class="pull-right">&copy; Bootshop</p>
+		<p class="pull-right">&copy; Hertola Stores</p>
 	</div><!-- Container End -->
 	</div>
 <!-- Placed at the end of the document so the pages load faster ============================================= -->
