@@ -9,7 +9,7 @@ from django.template.loader import render_to_string
 from django.core.mail import EmailMessage, send_mail
 from sendgrid.helpers.mail import SandBoxMode, MailSettings
 from django.conf import settings
-
+from django.views import View
 
 # users/views.py
 from django.shortcuts import render
@@ -187,3 +187,11 @@ def profile(request):
 
     return render(request, 'users/profile.html', context)
 
+
+
+class MyPasswordResetView(View):
+    def get(self, request, *args, **kwargs):
+            return render(request, "users/forgot_password.html")
+    
+    def post(self, request, *args, **kwargs):
+        email = request.POST.get("email")

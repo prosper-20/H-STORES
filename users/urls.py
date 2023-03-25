@@ -8,6 +8,7 @@ from .views import (
     ActivateView,
     CheckEmailView,
     SuccessView,
+    MyPasswordResetView
 )
 
 
