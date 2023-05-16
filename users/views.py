@@ -195,3 +195,19 @@ class MyPasswordResetView(View):
     
     def post(self, request, *args, **kwargs):
         email = request.POST.get("email")
+        print(email)
+        if User.objects.filter(email=email):
+            messages.success(request, f"We've emailed you instructions for setting your password.If you don't receive an email, please make sure you've entered the address you registered with.")
+            html_template = 'users/password_reset_email.html'
+            html_message = render_to_string(html_template)
+            subject = "Password Reset Link" 
+            email_from = settings.EMAIL_HOST_USER
+            recipient_list = [email]
+            message = EmailMessage(subject, html_message,
+                                email_from, recipient_list)
+            message.content_subtype = "html"
+            message.send()
+            return render(request, "users/forgot_password.html")
+        else:
+            messages.error(request, "Sorry, didn't find a user with this email....")
+            return render(request, "users/forgot_password.html")
