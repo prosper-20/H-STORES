@@ -27,6 +27,7 @@ urlpatterns = [
     path('coupons/', include('coupons.urls', namespace='coupons')),
     path('chaining/', include('smart_selects.urls')),
     path('', include('shop.urls', namespace='shop')),
+    path('__debug__/', include('debug_toolbar.urls')),
     
 ]
 
